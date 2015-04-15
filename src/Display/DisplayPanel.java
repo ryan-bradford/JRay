@@ -1,4 +1,4 @@
-package display;
+package Display;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,12 +7,15 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import main.Main;
+import Geometry.ColoredPolygon;
+import Geometry.Polygon3D;
+
 public class DisplayPanel extends JPanel {
 	
 	int screenWidth = 0;
 	int screenHeight = 0;
-	ArrayList<ColorPoint> points = new ArrayList<ColorPoint>();
-
+	
 	public DisplayPanel(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
@@ -23,14 +26,11 @@ public class DisplayPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D)(g);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screenWidth, screenHeight);
-		for(int i = 0; i < points.size(); i++) {
-			g.setColor(new Color(points.get(i).redValue, points.get(i).greenValue, points.get(i).blueValue));
-			g.drawLine(points.get(i).xPos, points.get(i).yPos, points.get(i).xPos, points.get(i).yPos);
+		for(int i = 0; i < Main.current.size(); i++) {
+			Polygon3D current = Main.current.get(i);
+			ColoredPolygon toDraw = current.rasterizeToScreen();
+			g.setColor(toDraw.myColor);
+			g.fillPolygon(toDraw);
 		}	
-	}
-	
-	public void addColorPoint(ColorPoint toAdd) {
-		this.points.add(toAdd);
-		repaint();
 	}
 }
