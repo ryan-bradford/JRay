@@ -15,6 +15,7 @@ public class DisplayPanel extends JPanel {
 	
 	int screenWidth = 0;
 	int screenHeight = 0;
+	public Color background = new Color(0, 0, 0);
 	
 	public DisplayPanel(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
@@ -24,7 +25,7 @@ public class DisplayPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)(g);
-		g.setColor(Color.BLACK);
+		g.setColor(background);
 		g.fillRect(0, 0, screenWidth, screenHeight);
 		for(int i = 0; i < Main.current.size(); i++) {
 			Polygon3D current = Main.current.get(i);

@@ -46,7 +46,7 @@ public class Main {
 		Point3D p7 = new Point3D(100, 1200, 0);		
 		Point3D p8 = new Point3D(100, 1200, 100);	
 		Point3D[] points = new Point3D[]{p1, p2, p3, p4};
-		Polygon3D mine = new Polygon3D(points, new Color(255, 0, 0));
+		Polygon3D mine = new Polygon3D(points, new Color(0, 255, 0));
 		current.add(mine);
 		display.repaint();
 	}

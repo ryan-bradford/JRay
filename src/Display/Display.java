@@ -6,7 +6,7 @@ import Geometry.ColoredPolygon;
 
 public class Display extends JFrame {
 	
-	DisplayPanel display;
+	public  DisplayPanel display;
 	
 	public Display(int screenWidth, int screenHeight) {
 		display = new DisplayPanel(screenWidth, screenHeight);
