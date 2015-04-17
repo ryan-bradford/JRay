@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Color;
-
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -11,6 +10,7 @@ import Controls.KeyControls;
 import Display.Display;
 import Geometry.Point3D;
 import Geometry.Polygon3D;
+import Other.OtherFunctions;
 import Other.ScreenPointFinder;
 import Update.UpdateThread;
 
@@ -37,17 +37,21 @@ public class Main {
 		createDisplay();
 		initUserControls();
 		startEngine();
+		OtherFunctions.hideCursor(true);
 		Point3D p1 = new Point3D(0, 1000, 100);
 		Point3D p2 = new Point3D(0, 1000, 0);
 		Point3D p3 = new Point3D(100, 1000, 0);		
-		Point3D p4 = new Point3D(100, 1000, 100);	
-		Point3D p5 = new Point3D(0, 1200, 100);
-		Point3D p6 = new Point3D(0, 1200, 0);
-		Point3D p7 = new Point3D(100, 1200, 0);		
-		Point3D p8 = new Point3D(100, 1200, 100);	
+		Point3D p4 = new Point3D(100, 1000, 100);		
 		Point3D[] points = new Point3D[]{p1, p2, p3, p4};
 		Polygon3D mine = new Polygon3D(points, new Color(0, 255, 0));
 		current.add(mine);
+		Point3D p5 = new Point3D(0, 2000, 100);
+		Point3D p6 = new Point3D(0, 2000, 0);
+		Point3D p7 = new Point3D(100, 2000, 0);		
+		Point3D p8 = new Point3D(100, 2000, 100);		
+		Point3D[] points1 = new Point3D[]{p5, p6, p7, p8};
+		Polygon3D mine1 = new Polygon3D(points1, new Color(0, 0, 255));
+		current.add(mine1);
 		display.repaint();
 	}
 	

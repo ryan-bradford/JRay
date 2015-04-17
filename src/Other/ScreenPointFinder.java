@@ -35,8 +35,9 @@ public class ScreenPointFinder {
 
 	public int getWidthPixel(double widthAngle) {
 		int toReturn = screenWidth + 1000;
+		double angle = TrigFunctions.findLowestAngle(widthAngle - Main.xAngle);
 		for (int i = 0; i < widthAngles.size(); i++) {
-			if (widthAngle - Main.xAngle < widthAngles.get(i)) {
+			if (angle < widthAngles.get(i)) {
 				toReturn = i;
 				break;
 			}
@@ -46,8 +47,9 @@ public class ScreenPointFinder {
 
 	public int getHeightPixel(double heightAngle) {
 		int toReturn = screenHeight + 1000;
+		double angle = TrigFunctions.findLowestAngle(heightAngle - Main.yAngle);
 		for (int i = 0; i < heightAngles.size(); i++) {
-			if (heightAngle - Main.yAngle < heightAngles.get(i)) {
+			if (angle < heightAngles.get(i)) {
 				toReturn = i;
 				break;
 			}

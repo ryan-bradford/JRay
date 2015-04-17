@@ -1,5 +1,7 @@
 package Geometry;
 
+import Other.TrigFunctions;
+
 public class Line {
 
 	public double length;
@@ -22,11 +24,11 @@ public class Line {
 	}
 	
 	public double getVertAngle() {
-		return Math.asin((end.zPos - start.zPos) / Math.sqrt(Math.pow((end.zPos - start.zPos), 2) + Math.pow((end.yPos - start.yPos), 2)));
+		return TrigFunctions.getAngle((end.zPos - start.zPos), (end.yPos - start.yPos));
 	}
 	
 	public double getHorAngle() {
-		return Math.atan((end.xPos - start.xPos) / (end.yPos - start.yPos));
+		return TrigFunctions.getAngle((end.xPos - start.xPos) , (end.yPos - start.yPos));
 	}
 	
 	public double getXLength() {
