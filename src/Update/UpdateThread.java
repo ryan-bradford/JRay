@@ -1,10 +1,12 @@
 package Update;
 
 import java.awt.AWTException;
+
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
+import Other.OtherFunctions;
 import main.Main;
 
 public class UpdateThread extends Thread {
@@ -43,6 +45,7 @@ public class UpdateThread extends Thread {
 				double yAngle = Main.yAngle + (Main.FOV / Main.screenHeight) * (currentY - Main.screenHeight / 2);
 				Main.xAngle = xAngle;
 				Main.yAngle = yAngle;
+				Main.current = OtherFunctions.sortList(Main.current);
 			}
 			Main.display.repaint();
 

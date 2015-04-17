@@ -9,10 +9,16 @@ public class Polygon3D {
 	
 	Point3D[] myPoints;
 	Color myColor;
+	public double distanceFromCamera;
 	
 	public Polygon3D(Point3D[] toAdd, Color toColor) {
 		myColor = toColor;
 		myPoints = toAdd;
+		Line[] current = getLinesToPoint(Main.cameraLocation);
+		for(int i = 0; i < current.length; i++) {
+			distanceFromCamera += current[i].length;
+		}
+		distanceFromCamera /= current.length;
 	}
 	
 	public Line[] getLinesToPoint(Point3D toPathTo) {

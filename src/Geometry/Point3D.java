@@ -9,7 +9,7 @@ public class Point3D {
 	public Point3D(double xPos, double yPos, double zPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
-		this.zPos  =zPos;
+		this.zPos = zPos;
 	}
 	
 }
