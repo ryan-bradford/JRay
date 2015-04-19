@@ -14,11 +14,18 @@ public class Polygon3D {
 	public Polygon3D(Point3D[] toAdd, Color toColor) {
 		myColor = toColor;
 		myPoints = toAdd;
+		updateDistance();
+	}
+	
+	public void updateDistance() {
+		int maxID = 0;
 		Line[] current = getLinesToPoint(Main.cameraLocation);
-		for(int i = 0; i < current.length; i++) {
-			distanceFromCamera += current[i].length;
+		for(int i = 1; i < current.length; i++) {
+			if(current[i].length < current[maxID].length) {
+				maxID = i;
+			}
 		}
-		distanceFromCamera /= current.length;
+		distanceFromCamera = current[maxID].length;
 	}
 	
 	public Line[] getLinesToPoint(Point3D toPathTo) {
