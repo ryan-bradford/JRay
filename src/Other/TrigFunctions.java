@@ -17,20 +17,17 @@ public class TrigFunctions {
 	}
 	
 	public static double getAngle(double opposite, double adjcent) {
-		double hypotenuse = Math.sqrt(Math.pow(opposite, 2) + Math.pow(adjcent, 2));
-		double sinValue = Math.asin(opposite / hypotenuse);
-		double cosValue = Math.acos(adjcent / hypotenuse);
-		double tanValue = Math.atan(opposite / adjcent);
+		double tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));
 		if(opposite < 0 && adjcent < 0) {
-			return Math.PI * 2 + tanValue;
+			return Math.PI + tanValue;
 		}
 		if(opposite < 0) {
-			return sinValue;
+			return Math.PI * 2 - tanValue;
 		}
 		if(adjcent < 0) {
-			return cosValue;
+			return Math.PI - tanValue;
 		}
-		return sinValue;
+		return tanValue;
 
 	}
 	

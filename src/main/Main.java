@@ -12,6 +12,7 @@ import Geometry.Point3D;
 import Geometry.Polygon3D;
 import Other.OtherFunctions;
 import Other.ScreenPointFinder;
+import ShapeGenerator.ShapeFactory;
 import Update.UpdateThread;
 
 public class Main {
@@ -30,29 +31,16 @@ public class Main {
 	public static KeyControls keyControls;
 	public static UpdateThread update;
 	public static ScreenPointFinder find;
+	static ShapeFactory factory;
 
 	public static void main(String[] args) {
-		current = new ArrayList<Polygon3D>();
+		initMainClass();
 		initPointFinder();
 		createDisplay();
 		initUserControls();
 		startEngine();
 		OtherFunctions.hideCursor(true);
-		Point3D p1 = new Point3D(0, 1000, 100);
-		Point3D p2 = new Point3D(0, 1000, 0);
-		Point3D p3 = new Point3D(100, 1000, 0);		
-		Point3D p4 = new Point3D(100, 1000, 100);		
-		Point3D[] points = new Point3D[]{p1, p2, p3, p4};
-		Polygon3D mine = new Polygon3D(points, new Color(0, 255, 0));
-		current.add(mine);
-		Point3D p5 = new Point3D(0, 2000, 100);
-		Point3D p6 = new Point3D(0, 2000, 0);
-		Point3D p7 = new Point3D(100, 2000, 0);		
-		Point3D p8 = new Point3D(100, 2000, 100);		
-		Point3D[] points1 = new Point3D[]{p5, p6, p7, p8};
-		Polygon3D mine1 = new Polygon3D(points1, new Color(0, 0, 255));
-		current.add(mine1);
-		display.repaint();
+		addArray(factory.generateSquare(0, 10000, 0, 1000, 0, 0, Math.PI / 3));
 	}
 	
 	public static void createDisplay() {
@@ -63,6 +51,10 @@ public class Main {
 		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public static void initMainClass() {
+		factory = new ShapeFactory();
+		current = new ArrayList<Polygon3D>();
+	}
 	
 	public static void initUserControls() {
 		keyControls = new KeyControls();
@@ -76,5 +68,19 @@ public class Main {
 	public static void startEngine() {
 		update = new UpdateThread();
 		update.start();
+	}
+	
+	public static void addArray(Polygon3D[] toAdd) {
+		for(int i = 0; i < toAdd.length; i++) {
+			current.add(toAdd[i]);
+		}
+		display.repaint();
+	}
+	
+	public static void addArray(ArrayList<Polygon3D> toAdd) {
+		for(int i = 0; i < toAdd.size(); i++) {
+			current.add(toAdd.get(i));
+		}
+		display.repaint();
 	}
 }
