@@ -45,15 +45,17 @@ public class KeyControls implements KeyListener {
 		}
 		
 		if(key == KeyEvent.VK_ESCAPE) {
-			Main.update.paused = !Main.update.paused;
+			Main.paused = !Main.paused;
 			if(blackOrRed) {
 				Main.display.display.background = new Color(255, 0, 0);
 				OtherFunctions.hideCursor(false);
 				blackOrRed = false;
+				Main.display.repaint();
 			} else {
 				Main.display.display.background = new Color(0, 0, 0);
 				OtherFunctions.hideCursor(true);
 				blackOrRed = true;
+				Main.display.repaint();
 			}
 		}
 	}

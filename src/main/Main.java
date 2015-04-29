@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -8,19 +7,22 @@ import javax.swing.JFrame;
 
 import Controls.KeyControls;
 import Display.Display;
+import Geometry.ColoredPolygon;
 import Geometry.Point3D;
 import Geometry.Polygon3D;
 import Other.OtherFunctions;
 import Other.ScreenPointFinder;
 import ShapeGenerator.ShapeFactory;
-import Update.UpdateThread;
+import Thread.TaskManager;
+import Update.UpdateTask;
+import Update.RasterizeTask;
 
 public class Main {
 
 	public static int screenHeight = Toolkit.getDefaultToolkit()
 			.getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static double FOV = Math.PI * 2 / 3;
+	public static double FOV = Math.PI * 3 / 6;
 	public static ArrayList<Double> widthAngles;
 	public static ArrayList<Double> heightAngles;
 	public static Point3D cameraLocation = new Point3D(0, 0, 0);
@@ -29,18 +31,25 @@ public class Main {
 	public static double yAngle = 0;
 	public static Display display;
 	public static KeyControls keyControls;
-	public static UpdateThread update;
+	public static UpdateTask update;
+	public static TaskManager manage;
 	public static ScreenPointFinder find;
+	public static boolean paused = false;
+	public static ColoredPolygon[] toDraw;
+	public static RasterizeTask[] rasterizers;
 	static ShapeFactory factory;
 
 	public static void main(String[] args) {
 		initMainClass();
+		initTaskManager();
 		initPointFinder();
+		startEngine();
 		createDisplay();
 		initUserControls();
-		startEngine();
 		OtherFunctions.hideCursor(true);
-		addArray(factory.generateSquare(0, 10000, 0, 1000, 0, 0, Math.PI / 3));
+		for(int i = 0; i < 1; i++) {
+			addArray(factory.generateSquare(i * 100, 1000, 0, 50));
+		}
 	}
 	
 	public static void createDisplay() {
@@ -66,8 +75,14 @@ public class Main {
 	}
 	
 	public static void startEngine() {
-		update = new UpdateThread();
-		update.start();
+		update = new UpdateTask();
+		double cores = Runtime.getRuntime().availableProcessors();
+		rasterizers = new RasterizeTask[(int) cores];
+		for(int i = 0; i < cores; i++) {
+			rasterizers[i] = new RasterizeTask(1/cores, i);
+			manage.addTask(rasterizers[i]);
+		}
+		manage.addTask(update);
 	}
 	
 	public static void addArray(Polygon3D[] toAdd) {
@@ -82,5 +97,9 @@ public class Main {
 			current.add(toAdd.get(i));
 		}
 		display.repaint();
+	}
+	
+	public static void initTaskManager() {
+		manage = new TaskManager();
 	}
 }
