@@ -19,6 +19,7 @@ public class DisplayPanel extends JPanel {
 	public Color background = new Color(0, 0, 0);
 	double timePassed;
 	int FPS = 0;
+	int fullFPS = 0;
 	double lastTime = System.currentTimeMillis();
 
 	public DisplayPanel(int screenWidth, int screenHeight) {
@@ -45,23 +46,11 @@ public class DisplayPanel extends JPanel {
 		lastTime =  System.currentTimeMillis();
 		FPS = FPS + 1;
 		if(timePassed >= 1000) {
-			 System.out.println(FPS);
+			fullFPS = FPS;
 			 FPS = 0;
 			 timePassed = 0.0;
 		}
-		// for(int i = 0; i < drawnPolys.size(); i++) {
-		// g2.setColor(Color.GRAY);
-		// for(int x = 1; x < drawnPolys.get(i).npoints + 1; x++) {
-		// if(x != drawnPolys.get(i).npoints) {
-		// g2.drawLine(drawnPolys.get(i).xpoints[x - 1],
-		// drawnPolys.get(i).ypoints[x - 1], drawnPolys.get(i).xpoints[x],
-		// drawnPolys.get(i).ypoints[x]);
-		// } else {
-		// g2.drawLine(drawnPolys.get(i).xpoints[x - 1],
-		// drawnPolys.get(i).ypoints[x - 1], drawnPolys.get(i).xpoints[0],
-		// drawnPolys.get(i).ypoints[0]);
-		// }
-		// }
-		// }
+		 g2.drawString(Integer.toString(fullFPS), 10, 13);
+		g2.setColor(Color.YELLOW);
 	}
 }
