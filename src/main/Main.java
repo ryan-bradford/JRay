@@ -48,7 +48,7 @@ public class Main {
 		initUserControls();
 		OtherFunctions.hideCursor(true);
 		for(int i = 0; i < 1; i++) {
-			addArray(factory.generateSquare(i * 100, 1000, 0, 50));
+			addArray(factory.generateSquare(i * 100, 200, 0, 50));
 		}
 	}
 	
@@ -78,11 +78,11 @@ public class Main {
 		update = new UpdateTask();
 		double cores = Runtime.getRuntime().availableProcessors();
 		rasterizers = new RasterizeTask[(int) cores];
+		manage.addTask(update);
 		for(int i = 0; i < cores; i++) {
 			rasterizers[i] = new RasterizeTask(1/cores, i);
 			manage.addTask(rasterizers[i]);
 		}
-		manage.addTask(update);
 	}
 	
 	public static void addArray(Polygon3D[] toAdd) {

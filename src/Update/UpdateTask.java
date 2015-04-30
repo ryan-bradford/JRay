@@ -31,11 +31,11 @@ public class UpdateTask extends Task {
 	@Override
 	public void runTask() { // The default task object
 		if (!Main.paused && readyToUpdate()) {
-			Main.display.repaint();
 			mouseMover.mouseMove(Main.screenWidth / 2, Main.screenHeight / 2);
+			Main.display.repaint();
 		}
 		try {
-			Thread.sleep(2);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
