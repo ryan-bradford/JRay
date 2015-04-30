@@ -24,7 +24,7 @@ public class RasterizeTask extends Task {
 			upperRange = (int) (Main.current.size() * percent * (orderNum + 1));
 			for(int i = lowerRange; i < upperRange; i++) {
 				try {
-					Main.toDraw[i] = Main.current.get(i).rasterizeToScreen();
+					Main.toLoad[i] = Main.current.get(i).rasterizeToScreen();
 				} catch(ArrayIndexOutOfBoundsException ex) {
 					
 				}

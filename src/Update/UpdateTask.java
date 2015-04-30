@@ -14,15 +14,10 @@ public class UpdateTask extends Task {
 	@Override
 	public void runTask() { // The default task object
 		if (!Main.paused && readyToUpdate()) {
-			try {
-				Main.display.repaint();
-				Thread.sleep(2);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Main.display.repaint();
 			Main.current = OtherFunctions.sortList(Main.current);
-			Main.toDraw = new ColoredPolygon[Main.current.size()];
+			Main.toDraw = Main.toLoad;
+			Main.toLoad = new ColoredPolygon[Main.current.size()];
 			for (int i = 0; i < Main.rasterizers.length; i++) {
 				Main.rasterizers[i].isDone = false;
 			}

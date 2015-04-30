@@ -37,6 +37,7 @@ public class Main {
 	public static ScreenPointFinder find;
 	public static boolean paused = false;
 	public static ColoredPolygon[] toDraw;
+	public static ColoredPolygon[] toLoad;
 	public static RasterizeTask[] rasterizers;
 	static ShapeFactory factory;
 	static MouseMoverTask mover;
