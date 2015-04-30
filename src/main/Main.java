@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import Controls.KeyControls;
+import Controls.MouseMoverTask;
 import Display.Display;
 import Geometry.ColoredPolygon;
 import Geometry.Point3D;
@@ -38,6 +39,7 @@ public class Main {
 	public static ColoredPolygon[] toDraw;
 	public static RasterizeTask[] rasterizers;
 	static ShapeFactory factory;
+	static MouseMoverTask mover;
 
 	public static void main(String[] args) {
 		initMainClass();
@@ -48,7 +50,7 @@ public class Main {
 		initUserControls();
 		OtherFunctions.hideCursor(true);
 		for(int i = 0; i < 1; i++) {
-			addArray(factory.generateSquare(i * 100, 200, 0, 50));
+			addArray(factory.generateCube(i * 100, 200, 0, 50));
 		}
 	}
 	
@@ -68,6 +70,8 @@ public class Main {
 	public static void initUserControls() {
 		keyControls = new KeyControls();
 		display.addKeyListener(keyControls);
+		mover = new MouseMoverTask();
+		manage.addTask(mover);
 	}
 	
 	public static void initPointFinder() {
