@@ -50,7 +50,7 @@ public class Main {
 		createDisplay();
 		initUserControls();
 		OtherFunctions.hideCursor(true);
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 4; i++) {
 			addArray(factory.generateSquare(i * 100, 200, 0, 50));
 		}
 		// addArray(factory.generateImage(0, 100, 0, 100, "hi.jpg"));
@@ -82,7 +82,7 @@ public class Main {
 
 	public static void startEngine() {
 		update = new UpdateTask();
-		double cores = Runtime.getRuntime().availableProcessors();
+		double cores = Runtime.getRuntime().availableProcessors() - 1;
 		rasterizers = new RasterizeTask[(int) cores];
 		manage.addTask(update);
 		for (int i = 0; i < cores; i++) {

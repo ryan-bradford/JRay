@@ -8,6 +8,7 @@ public class TaskManager { // The thing that distributes the tasks to the differ
 	public TaskManager() {
 		lowestLoadAmount = 50000; // Random value
 		cores = new CPUCore[Runtime.getRuntime().availableProcessors()]; // Gets the amount of available cores
+		//cores = new CPUCore[9]; // Gets the amount of available cores
 		for (int i = 0; i < cores.length; i++) {
 			cores[i] = new CPUCore(null); // Creates the core objects
 		}
