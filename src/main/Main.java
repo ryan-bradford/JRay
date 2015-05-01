@@ -23,7 +23,7 @@ public class Main {
 	public static int screenHeight = Toolkit.getDefaultToolkit()
 			.getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static double FOV = Math.PI * 3 / 6;
+	public static double FOV = 1.65806278939;
 	public static ArrayList<Double> widthAngles;
 	public static ArrayList<Double> heightAngles;
 	public static Point3D cameraLocation = new Point3D(0, 0, 0);
