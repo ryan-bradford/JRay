@@ -41,5 +41,9 @@ public class OtherFunctions {
 		}
 		return sorted;
 	}
+	
+	public static int[] RGBIntToArray(int RGB) {
+		return new int[] {RGB};
+	}
 
 }

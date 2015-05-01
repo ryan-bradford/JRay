@@ -50,11 +50,12 @@ public class Main {
 		createDisplay();
 		initUserControls();
 		OtherFunctions.hideCursor(true);
-		for(int i = 0; i < 1; i++) {
-			addArray(factory.generateCube(i * 100, 200, 0, 50));
+		for (int i = 0; i < 1; i++) {
+			addArray(factory.generateSquare(i * 100, 200, 0, 50));
 		}
+		// addArray(factory.generateImage(0, 100, 0, 100, "hi.jpg"));
 	}
-	
+
 	public static void createDisplay() {
 		display = new Display(screenWidth, screenHeight);
 		display.pack();
@@ -62,48 +63,48 @@ public class Main {
 		display.setVisible(true);
 		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public static void initMainClass() {
 		factory = new ShapeFactory();
 		current = new ArrayList<Polygon3D>();
 	}
-	
+
 	public static void initUserControls() {
 		keyControls = new KeyControls();
 		display.addKeyListener(keyControls);
 		mover = new MouseMoverTask();
 		manage.addTask(mover);
 	}
-	
+
 	public static void initPointFinder() {
 		find = new ScreenPointFinder();
 	}
-	
+
 	public static void startEngine() {
 		update = new UpdateTask();
 		double cores = Runtime.getRuntime().availableProcessors();
 		rasterizers = new RasterizeTask[(int) cores];
 		manage.addTask(update);
-		for(int i = 0; i < cores; i++) {
-			rasterizers[i] = new RasterizeTask(1/cores, i);
+		for (int i = 0; i < cores; i++) {
+			rasterizers[i] = new RasterizeTask(1 / cores, i);
 			manage.addTask(rasterizers[i]);
 		}
 	}
-	
+
 	public static void addArray(Polygon3D[] toAdd) {
-		for(int i = 0; i < toAdd.length; i++) {
+		for (int i = 0; i < toAdd.length; i++) {
 			current.add(toAdd[i]);
 		}
 		display.repaint();
 	}
-	
+
 	public static void addArray(ArrayList<Polygon3D> toAdd) {
-		for(int i = 0; i < toAdd.size(); i++) {
+		for (int i = 0; i < toAdd.size(); i++) {
 			current.add(toAdd.get(i));
 		}
 		display.repaint();
 	}
-	
+
 	public static void initTaskManager() {
 		manage = new TaskManager();
 	}

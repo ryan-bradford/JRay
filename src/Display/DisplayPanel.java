@@ -33,24 +33,28 @@ public class DisplayPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) (g);
 		g2.setColor(background);
 		g2.fillRect(0, 0, screenWidth, screenHeight);
-		g2.setStroke(new BasicStroke(2));	
-		for (int i = 0; i < Main.toDraw.length; i++) {
-			try {
-				g2.setColor(Main.toDraw[i].myColor);
-				g2.fillPolygon(Main.toDraw[i]);
-			} catch (NullPointerException ex) {
-				//ex.printStackTrace();
+		g2.setStroke(new BasicStroke(2));
+		try {
+			for (int i = 0; i < Main.toDraw.length; i++) {
+				try {
+					g2.setColor(Main.toDraw[i].myColor);
+					g2.fillPolygon(Main.toDraw[i]);
+				} catch (NullPointerException ex) {
+					// ex.printStackTrace();
+				}
 			}
+		} catch (NullPointerException ex) {
+			// ex.printStackTrace();
 		}
 		timePassed += System.currentTimeMillis() - lastTime;
-		lastTime =  System.currentTimeMillis();
+		lastTime = System.currentTimeMillis();
 		FPS = FPS + 1;
-		if(timePassed >= 1000) {
+		if (timePassed >= 1000) {
 			fullFPS = FPS;
-			 FPS = 0;
-			 timePassed = 0.0;
+			FPS = 0;
+			timePassed = 0.0;
 		}
-		 g2.drawString(Integer.toString(fullFPS), 10, 13);
+		g2.drawString(Integer.toString(fullFPS), 10, 13);
 		g2.setColor(Color.YELLOW);
 	}
 }
