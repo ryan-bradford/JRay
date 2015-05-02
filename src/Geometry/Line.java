@@ -24,11 +24,11 @@ public class Line {
 	}
 	
 	public double getVertAngle() {
-		return TrigFunctions.getAngle((end.zPos - start.zPos), (end.yPos - start.yPos));
+		return TrigFunctions.getAngle((end.zPos - start.zPos), (end.yPos - start.yPos), false, true);
 	}
 	
 	public double getHorAngle() {
-		return TrigFunctions.getAngle((end.xPos - start.xPos) , (end.yPos - start.yPos));
+		return TrigFunctions.getAngle((end.xPos - start.xPos) , (end.yPos - start.yPos), false, false);
 	}
 	
 	public double getXLength() {

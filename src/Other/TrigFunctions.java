@@ -16,15 +16,21 @@ public class TrigFunctions {
 		}
 	}
 	
-	public static double getAngle(double opposite, double adjcent) {
+	public static double getAngle(double opposite, double adjcent, boolean ignoreOpposite, boolean ignoreAdjcent) {
 		double tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));
 		if(opposite < 0 && adjcent < 0) {
 			return Math.PI + tanValue;
 		}
 		if(opposite < 0) {
+			if(ignoreOpposite) {
+				return tanValue;
+			}
 			return Math.PI * 2 - tanValue;
 		}
 		if(adjcent < 0) {
+			if(ignoreAdjcent) {
+				return tanValue;
+			}
 			return Math.PI - tanValue;
 		}
 		return tanValue;
