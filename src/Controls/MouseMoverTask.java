@@ -28,8 +28,9 @@ public class MouseMoverTask extends Task {
 	public void runTask() { // The default task object
 		if (!Main.paused) {
 			if (toMoveOrCalculate) {
-				mouseMover.mouseMove(Main.screenWidth / 2,
-						Main.screenHeight / 2);
+				mouseMover.mouseMove((int)(Main.screenWidth / 2),
+						(int)(Main.screenHeight / 2));
+				Main.display.setBounds((Main.screenWidth - Main.display.getWidth()) / 2, (Main.screenHeight - Main.display.getHeight()) / 2, Main.display.getWidth(), Main.display.getHeight());
 				toMoveOrCalculate = false;
 			} else {
 				Point point = MouseInfo.getPointerInfo().getLocation();

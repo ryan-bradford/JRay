@@ -1,59 +1,30 @@
 package Other;
 
-import java.awt.Toolkit;
-import java.util.ArrayList;
-
 import main.Main;
 
 public class ScreenPointFinder {
-	
-	public double FOV = Main.FOV;
-	public ArrayList<Double> widthAngles;
-	public ArrayList<Double> heightAngles;
-	public int screenHeight = Toolkit.getDefaultToolkit()
-			.getScreenSize().height;
-	public int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-
-	public ScreenPointFinder() {
-		generateScreenAngles();
-	}
-	
-	public void generateScreenAngles() {
-		widthAngles = new ArrayList<Double>();
-		heightAngles = new ArrayList<Double>();
-		double startingAngle = -FOV / 2;
-		double changePerMove = FOV / screenHeight;
-		for (int i = 0; i < screenHeight; i++) {
-			heightAngles.add(startingAngle + changePerMove * i);
-		}
-		startingAngle = -FOV / 2;
-		changePerMove = FOV / screenWidth;
-		for (int i = 0; i < screenWidth; i++) {
-			widthAngles.add(startingAngle + changePerMove * i);
-		}
-	}
 
 	public int getWidthPixel(double widthAngle) {
-		int toReturn = screenWidth + 1000;
-		double angle = TrigFunctions.findLowestAngle(widthAngle - Main.xAngle);
-		for (int i = 0; i < widthAngles.size(); i++) {
-			if (angle < widthAngles.get(i)) {
-				toReturn = i;
-				break;
-			}
+		double currentFOV = Main.FOV;
+		if(Main.display.getBounds().getWidth() < Main.display.getBounds().getHeight()) {
+			currentFOV *= (double)(Main.display.getContentPane().getWidth()) / (double)(Main.display.getContentPane().getHeight());
 		}
+		double angle = TrigFunctions.findLowestAngle(widthAngle - Main.xAngle);
+		double initAngle = angle + currentFOV/2;
+		double changePerMove = currentFOV / Main.display.getContentPane().getWidth();
+		int toReturn = (int) (initAngle / changePerMove);
 		return toReturn;
 	}
 
 	public int getHeightPixel(double heightAngle) {
-		int toReturn = screenHeight + 1000;
-		double angle = TrigFunctions.findLowestAngle(heightAngle - Main.yAngle);
-		for (int i = 0; i < heightAngles.size(); i++) {
-			if (angle < heightAngles.get(i)) {
-				toReturn = i;
-				break;
-			}
+		double currentFOV = Main.FOV;
+		if(Main.display.getContentPane().getHeight() < Main.display.getContentPane().getWidth()) {
+			currentFOV *= (double)(Main.display.getContentPane().getHeight()) / (double)(Main.display.getContentPane().getWidth());
 		}
+		double angle = TrigFunctions.findLowestAngle(heightAngle - Main.yAngle);
+		double initAngle = angle + currentFOV/2;
+		double changePerMove = currentFOV / Main.display.getContentPane().getHeight();
+		int toReturn = (int) (initAngle / changePerMove);
 		return toReturn;
 	}
 }
