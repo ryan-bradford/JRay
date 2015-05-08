@@ -9,7 +9,7 @@ import main.Main;
 
 public class KeyControls implements KeyListener {
 
-	boolean blackOrRed = true; //True is black, false is red
+	public boolean blackOrRed = true; //True is black, false is red
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

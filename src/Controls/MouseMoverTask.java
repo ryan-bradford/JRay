@@ -1,11 +1,13 @@
 package Controls;
 
 import java.awt.AWTException;
+import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
 import main.Main;
+import Other.OtherFunctions;
 import Thread.Task;
 
 public class MouseMoverTask extends Task {
@@ -44,6 +46,13 @@ public class MouseMoverTask extends Task {
 				Main.yAngle = yAngle;
 				toMoveOrCalculate = true;
 			}
+		}
+		if(!Main.display.isActive() && !Main.paused) {
+			Main.paused = true;
+			Main.display.display.background = new Color(255, 0, 0);
+			OtherFunctions.hideCursor(false);
+			Main.keyControls.blackOrRed = false;
+			Main.display.repaint();
 		}
 	}
 
