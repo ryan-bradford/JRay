@@ -9,7 +9,7 @@ import main.Main;
 
 public class KeyControls implements KeyListener {
 
-	public boolean blackOrRed = true; //True is black, false is red
+	boolean blackOrRed = true; //True is black, false is red
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -58,6 +58,32 @@ public class KeyControls implements KeyListener {
 				Main.display.repaint();
 			}
 		}
+		
+		if(key == KeyEvent.VK_UP) {
+			if(Main.FOV < Math.PI * 4 / 3) {
+				Main.FOV += Math.PI / 12;
+			}
+		}
+		
+		if(key == KeyEvent.VK_DOWN) {
+			if(Main.FOV > Math.PI / 3) {
+				Main.FOV -= Math.PI / 12;
+			}
+		}
+		
+		if(key == KeyEvent.VK_RIGHT) {
+			if(Main.sensitivity < 10) {
+				Main.sensitivity++;
+			}
+		}
+		
+		if(key == KeyEvent.VK_LEFT) {
+			if(Main.sensitivity > 1) {
+				Main.sensitivity--;
+			}
+		}
+		
+		
 	}
 
 	@Override

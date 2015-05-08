@@ -39,6 +39,7 @@ public class Main {
 	public static ColoredPolygon[] toDraw;
 	public static ColoredPolygon[] toLoad;
 	public static RasterizeTask[] rasterizers;
+	public static double sensitivity = 2;
 	static ShapeFactory factory;
 	static MouseMoverTask mover;
 
