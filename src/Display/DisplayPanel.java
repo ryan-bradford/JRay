@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import main.Main;
 import Geometry.ColoredPolygon;
 import Geometry.Polygon3D;
+import Other.OtherFunctions;
 
 public class DisplayPanel extends JPanel {
 
@@ -39,6 +40,7 @@ public class DisplayPanel extends JPanel {
 				try {
 					g2.setColor(Main.toDraw[i].myColor);
 					g2.fillPolygon(Main.toDraw[i]);
+					g2.drawImage(Main.toDraw[i].img, (int)(Main.toDraw[i].minX), (int)(Main.toDraw[i].minY), null);
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();
 				}

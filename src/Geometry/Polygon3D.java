@@ -1,6 +1,7 @@
 package Geometry;
 
 import java.awt.Color;
+import java.awt.Image;
 
 import Other.ScreenPointFinder;
 import main.Main;
@@ -10,10 +11,12 @@ public class Polygon3D {
 	Point3D[] myPoints;
 	Color myColor;
 	public double distanceFromCamera;
+	public Image image;
 	
-	public Polygon3D(Point3D[] toAdd, Color toColor) {
+	public Polygon3D(Point3D[] toAdd, Color toColor, Image image) {
 		myColor = toColor;
 		myPoints = toAdd;
+		this.image = image;
 		updateDistance();
 	}
 	
@@ -44,7 +47,7 @@ public class Polygon3D {
 			xs[i] = Main.find.getWidthPixel(lines[i].getHorAngle());
 			ys[i] = Main.find.getHeightPixel(lines[i].getVertAngle());
 		}
-		return new ColoredPolygon(myColor, xs, ys);
+		return new ColoredPolygon(myColor, xs, ys, image);
 	}
 	
 }

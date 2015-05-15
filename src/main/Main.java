@@ -52,9 +52,9 @@ public class Main {
 		initUserControls();
 		OtherFunctions.hideCursor(true);
 		for (int i = 0; i < 4; i++) {
-			addArray(factory.generateSquare(i * 100, 200, 0, 50));
+			//addArray(factory.generateSquare(i * 100, 200, 0, 50));
 		}
-		//addArray(factory.generateImage(0, 100, 0, 100, "download.jpg"));
+		addArray(factory.generateImage(0, 100, 0, 100, "download.jpg"));
 	}
 
 	public static void createDisplay() {
