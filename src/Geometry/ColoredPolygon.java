@@ -6,7 +6,8 @@ import java.awt.Polygon;
 
 import Other.OtherFunctions;
 
-public class ColoredPolygon extends Polygon {
+public class ColoredPolygon extends Polygon { //A sub-object of polygon
+											  //It is a polygon which can store a color and an image
 	
 	public Color myColor;
 	public Image img;

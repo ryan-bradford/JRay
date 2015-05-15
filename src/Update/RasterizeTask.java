@@ -18,13 +18,13 @@ public class RasterizeTask extends Task {
 	}
 	
 	@Override
-	public void runTask() { //The default task object
-		if (!Main.paused && !isDone) {
+	public void runTask() { //Runs once for every time the updater runs
+		if (!Main.paused && !isDone) { //Rasterizes the polygons it needs to that are within its range
 			lowerRange = (int) (Main.current.size() * percent * orderNum);
 			upperRange = (int) (Main.current.size() * percent * (orderNum + 1));
 			for(int i = lowerRange; i < upperRange; i++) {
 				try {
-					Main.toLoad[i] = Main.current.get(i).rasterizeToScreen();
+					Main.toLoad[i] = Main.current.get(i).rasterizeToScreen(); //Sets a buffer polygon
 				} catch(ArrayIndexOutOfBoundsException ex) {
 					
 				}
@@ -33,7 +33,6 @@ public class RasterizeTask extends Task {
 		}
 	}
 	
-	//Most methods will be overriden
 	@Override
 	public Boolean returnRunnable() {
 		return true;
@@ -51,6 +50,6 @@ public class RasterizeTask extends Task {
 	
 	@Override
 	public int getCPULoad() {
-		return 3; //0 is no load, 3 is maximum load
+		return 3; 
 	}
 }

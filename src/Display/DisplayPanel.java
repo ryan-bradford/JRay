@@ -32,15 +32,15 @@ public class DisplayPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		ArrayList<ColoredPolygon> drawnPolys = new ArrayList<ColoredPolygon>();
 		Graphics2D g2 = (Graphics2D) (g);
-		g2.setColor(background);
-		g2.fillRect(0, 0, screenWidth, screenHeight);
-		g2.setStroke(new BasicStroke(2));
+		g2.setColor(background); //Sets the background color
+		g2.fillRect(0, 0, screenWidth, screenHeight); //Draws the background
+		//g2.setStroke(new BasicStroke(2));
 		try {
 			for (int i = 0; i < Main.toDraw.length; i++) {
 				try {
 					g2.setColor(Main.toDraw[i].myColor);
-					g2.fillPolygon(Main.toDraw[i]);
-					g2.drawImage(Main.toDraw[i].img, (int)(Main.toDraw[i].minX), (int)(Main.toDraw[i].minY), null);
+					g2.fillPolygon(Main.toDraw[i]);//Draws the rasterized polygon
+					g2.drawImage(Main.toDraw[i].img, (int)(Main.toDraw[i].minX), (int)(Main.toDraw[i].minY), null);//Draws its image (if needed)
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();
 				}
@@ -48,7 +48,7 @@ public class DisplayPanel extends JPanel {
 		} catch (NullPointerException ex) {
 			// ex.printStackTrace();
 		}
-		timePassed += System.currentTimeMillis() - lastTime;
+		timePassed += System.currentTimeMillis() - lastTime; //Record FPS
 		lastTime = System.currentTimeMillis();
 		FPS = FPS + 1;
 		if (timePassed >= 1000) {
@@ -56,7 +56,7 @@ public class DisplayPanel extends JPanel {
 			FPS = 0;
 			timePassed = 0.0;
 		}
+		g2.setColor(Color.YELLOW); //Draw FPS
 		g2.drawString(Integer.toString(fullFPS), 10, 13);
-		g2.setColor(Color.YELLOW);
 	}
 }
