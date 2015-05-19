@@ -54,9 +54,9 @@ public class Main { //The class the begins the engine
 		OtherFunctions.hideCursor(true);
 		for (int i = 0; i < 4; i++) {
 			//addArray(factory.generateSquare(i * 100, 200, 0, 50));
-			addArray(factory.generateImage(i * 100, 200, 0, 50, "download.jpg"));
+			//addArray(factory.generateImage(i * 100, 200, 0, 50, "download.jpg"));
 		}
-		//addArray(factory.generateImage(0, 100, 0, 100, "download.jpg"));
+		addArray(factory.generateSquare(-100, 1000, 0, 100));
 	}
 
 	public static void createDisplay() { //Inits and Makes the JFrame visible

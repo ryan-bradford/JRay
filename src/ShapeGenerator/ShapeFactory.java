@@ -74,5 +74,14 @@ public class ShapeFactory { // Creates some polygons
 		toReturn[0] = mine;
 		return toReturn;
 	}
+	
+	public Polygon3D[] generatePoint(int cornerX, int cornerY, int cornerZ, double width) {
+		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
+		Point3D[] points = new Point3D[]{p1};
+		Polygon3D mine = new Polygon3D(points, new Color(0, 255, 0), null);
+		Polygon3D[] toReturn = new Polygon3D[1];
+		toReturn[0] = mine;
+		return toReturn;
+	}
 
 }

@@ -24,11 +24,29 @@ public class Line {
 	}
 	
 	public double getVertAngle() { //Gets the vertical angle of the line (up down angle)
-		return TrigFunctions.getAngle((end.zPos - start.zPos), (end.yPos - start.yPos), false, true);
+		double opposite = (end.zPos - start.zPos);
+		double adjcent = Math.abs(end.yPos - start.yPos);		
+		double tanValue = Math.atan(Math.abs(opposite) / (adjcent));//Expands upon the java trig functions
+		if(opposite < 0) {
+			return Math.PI * 2 - tanValue;
+		}
+		return tanValue;
 	}
 	
 	public double getHorAngle() { //Gets the horizontal angle of the line (left right angle)
-		return TrigFunctions.getAngle((end.xPos - start.xPos) , (end.yPos - start.yPos), false, false);
+		double opposite = (end.xPos - start.xPos);
+		double adjcent = (end.yPos - start.yPos);	
+		double tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));//Expands upon the java trig functions
+		if(opposite < 0 && adjcent < 0) {									//Allows for more accurate
+			return Math.PI + tanValue;
+		}
+		if(opposite < 0) {
+			return Math.PI * 2 - tanValue;
+		}
+		if(adjcent < 0) {
+			return Math.PI - tanValue;
+		}
+		return tanValue;
 	}
 	
 	public double getXLength() {

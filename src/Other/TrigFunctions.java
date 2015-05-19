@@ -16,25 +16,4 @@ public class TrigFunctions {
 		}
 	}
 	
-	public static double getAngle(double opposite, double adjcent, boolean ignoreOpposite, boolean ignoreAdjcent) { 
-		double tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));//Expands upon the java trig functions
-		if(opposite < 0 && adjcent < 0) {									//Allows for more accurate
-			return Math.PI + tanValue;
-		}
-		if(opposite < 0) {
-			if(ignoreOpposite) {
-				return tanValue;
-			}
-			return Math.PI * 2 - tanValue;
-		}
-		if(adjcent < 0) {
-			if(ignoreAdjcent) {
-				return tanValue;
-			}
-			return Math.PI - tanValue;
-		}
-		return tanValue;
-
-	}
-	
 }

@@ -25,7 +25,8 @@ public class ScreenPointFinder {
 			currentFOV *= (double) (Main.display.getContentPane().getHeight()) / (double) (Main.display.getContentPane().getWidth());
 		}
 		double angle = TrigFunctions.findLowestAngle(heightAngle - Main.yAngle);
-		double initAngle = angle + currentFOV / 2;
+		double initAngle = angle;
+		//System.out.println(initAngle);
 		double changePerMove = currentFOV / Main.display.getContentPane().getHeight();
 		int toReturn = (int) (initAngle / changePerMove);
 		return toReturn;

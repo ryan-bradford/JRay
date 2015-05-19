@@ -34,7 +34,7 @@ public class DisplayPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) (g);
 		g2.setColor(background); //Sets the background color
 		g2.fillRect(0, 0, screenWidth, screenHeight); //Draws the background
-		//g2.setStroke(new BasicStroke(2));
+		g2.setStroke(new BasicStroke(10));
 		try {
 			for (int i = 0; i < Main.toDraw.length; i++) {
 				try {
