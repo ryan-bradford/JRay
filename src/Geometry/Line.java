@@ -1,7 +1,5 @@
 package Geometry;
 
-import Other.TrigFunctions;
-
 public class Line {
 
 	public double length;
@@ -25,7 +23,7 @@ public class Line {
 	
 	public double getVertAngle() { //Gets the vertical angle of the line (up down angle)
 		double opposite = (end.zPos - start.zPos);
-		double adjcent = Math.abs(end.yPos - start.yPos);		
+		double adjcent = Math.sqrt(Math.pow(Math.abs(end.yPos - start.yPos), 2) + Math.pow(Math.abs(end.xPos - start.xPos), 2));	
 		double tanValue = Math.atan(Math.abs(opposite) / (adjcent));//Expands upon the java trig functions
 		if(opposite < 0) {
 			return Math.PI * 2 - tanValue;
