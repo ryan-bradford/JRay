@@ -25,13 +25,13 @@ public class KeyControls implements KeyListener {
 		}
 		
 		if (key == KeyEvent.VK_W) {//Move forwards based on your rotation
-			Main.cameraLocation.zPos += 10 * Math.sin(Main.yAngle);
+			//Main.cameraLocation.zPos += 10 * Math.sin(Main.yAngle);
 			Main.cameraLocation.xPos += 10 * Math.sin(Main.xAngle);
 			Main.cameraLocation.yPos += 10 * Math.cos(Main.xAngle);
 		}
 		
 		if (key == KeyEvent.VK_S) {//Move backwards based on your rotation
-			Main.cameraLocation.zPos -= 10 * Math.sin(Main.yAngle);
+			//Main.cameraLocation.zPos -= 10 * Math.sin(Main.yAngle);
 			Main.cameraLocation.xPos -= 10 * Math.sin(Main.xAngle);
 			Main.cameraLocation.yPos -= 10 * Math.cos(Main.xAngle);
 		}

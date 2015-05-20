@@ -40,7 +40,9 @@ public class DisplayPanel extends JPanel {
 				try {
 					g2.setColor(Main.current.get(i).myPoly.myColor);
 					g2.fillPolygon(Main.current.get(i).myPoly);//Draws the rasterized polygon
-					g2.drawImage(Main.current.get(i).myPoly.img, (int)(Main.current.get(i).myPoly.minX), (int)(Main.current.get(i).myPoly.minY), null);//Draws its image (if needed)
+					if(Main.current.get(i).myPoly.img != null) {
+						g2.drawImage(Main.current.get(i).myPoly.img, (int)(Main.current.get(i).myPoly.minX), (int)(Main.current.get(i).myPoly.minY), null);//Draws its image (if needed)
+					}
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();
 				}
