@@ -35,9 +35,6 @@ public class Main { //The class the begins the engine
 	public static TaskManager manage; //The thing that allocates "Tasks" to different CPU Cores
 	public static ScreenPointFinder find; //The algorithm that changes angle to pixel
 	public static boolean paused = false; //Whether the engine is paused or not
-	public static ColoredPolygon[] toDraw; //What should be drawn
-	public static ColoredPolygon[] toLoad; //The buffer between toDraw and current
-										   //Makes sure the display wont draw some half filled list
 	public static RasterizeTask[] rasterizers; //The tasks which do the rasterization
 	public static double sensitivity = 2; //The sensitivity of the mouse, range of 1 to 10 
 	static ShapeFactory factory; //The object which can produce different polygons

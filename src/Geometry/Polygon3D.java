@@ -12,6 +12,7 @@ public class Polygon3D {
 	Color myColor;
 	public double distanceFromCamera;
 	public Image image;
+	public ColoredPolygon myPoly; 
 	
 	public Polygon3D(Point3D[] toAdd, Color toColor, Image image) { //The 3D Polygon Object
 		myColor = toColor;
@@ -39,7 +40,7 @@ public class Polygon3D {
 		return lines;
 	}
 	
-	public ColoredPolygon rasterizeToScreen() { //Rasterizes the polygon
+	public void rasterizeToScreen() { //Rasterizes the polygon
 		int[] xs = new int[myPoints.length];
 		int[] ys = new int[myPoints.length];
 		Line[] lines = getLinesToPoint(Main.cameraLocation); //Gets the lines to the camera
@@ -47,7 +48,7 @@ public class Polygon3D {
 			xs[i] = Main.find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
 			ys[i] = Main.find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
-		return new ColoredPolygon(myColor, xs, ys, image);
+		myPoly = new ColoredPolygon(myColor, xs, ys, image);
 	}
 	
 }

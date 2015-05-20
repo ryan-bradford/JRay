@@ -36,11 +36,11 @@ public class DisplayPanel extends JPanel {
 		g2.fillRect(0, 0, screenWidth, screenHeight); //Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
-			for (int i = 0; i < Main.toDraw.length; i++) {
+			for (int i = 0; i < Main.current.size(); i++) {
 				try {
-					g2.setColor(Main.toDraw[i].myColor);
-					g2.fillPolygon(Main.toDraw[i]);//Draws the rasterized polygon
-					g2.drawImage(Main.toDraw[i].img, (int)(Main.toDraw[i].minX), (int)(Main.toDraw[i].minY), null);//Draws its image (if needed)
+					g2.setColor(Main.current.get(i).myPoly.myColor);
+					g2.fillPolygon(Main.current.get(i).myPoly);//Draws the rasterized polygon
+					g2.drawImage(Main.current.get(i).myPoly.img, (int)(Main.current.get(i).myPoly.minX), (int)(Main.current.get(i).myPoly.minY), null);//Draws its image (if needed)
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();
 				}
