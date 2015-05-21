@@ -1,12 +1,14 @@
 package Controls;
 
 import java.awt.AWTException;
+
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
 import main.Main;
+
 import Other.OtherFunctions;
 import Thread.Task;
 
@@ -29,7 +31,7 @@ public class MouseMoverTask extends Task {
 
 	@Override
 	public void runTask() { // The default task object
-		if (!Main.paused) {
+		if (!Main.display.paused) {
 			if (toMoveOrCalculate) {
 				mouseMover.mouseMove((int)(Main.screenWidth / 2),
 						(int)(Main.screenHeight / 2)); //Center mouse
@@ -40,20 +42,20 @@ public class MouseMoverTask extends Task {
 				Point point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
 				currentX = (int) point.getX();
 				currentY = (int) point.getY();
-				double xAngle = Main.xAngle + (Main.FOV / Main.screenWidth) / Main.sensitivity
+				double xAngle = Main.display.xAngle + (Main.display.FOV / Main.screenWidth) / Main.display.sensitivity
 						* (currentX - Main.screenWidth / 2); //Calculate xAngle moved
-				double yAngle = Main.yAngle + (Main.FOV / Main.screenHeight) / Main.sensitivity
+				double yAngle = Main.display.yAngle + (Main.display.FOV / Main.screenHeight) / Main.display.sensitivity
 						* (currentY - Main.screenHeight / 2);//Calculate yAngle moved
-				Main.xAngle = xAngle;
-				Main.yAngle = yAngle;
+				Main.display.xAngle = xAngle;
+				Main.display.yAngle = yAngle;
 				toMoveOrCalculate = true;
 			}
 		}
-		if(!Main.display.isActive() && !Main.paused) {//Pauses the game if you move the window to the background
-			Main.paused = true;
+		if(!Main.display.isActive() && !Main.display.paused) {//Pauses the game if you move the window to the background
+			Main.display.paused = true;
 			Main.display.display.background = new Color(255, 0, 0);
 			OtherFunctions.hideCursor(false);
-			Main.keyControls.blackOrRed = false;
+			Main.display.keyControls.blackOrRed = false;
 			Main.display.repaint();
 		}
 	}

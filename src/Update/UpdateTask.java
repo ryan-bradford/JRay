@@ -13,18 +13,18 @@ public class UpdateTask extends Task {
 
 	@Override
 	public void runTask() { // The default task object
-		if (!Main.paused && readyToUpdate()) { //Runs once for every time the rasterizer runs
+		if (!Main.display.paused && readyToUpdate()) { //Runs once for every time the rasterizer runs
 			Main.display.repaint(); //Makes the screen call the paintComponent method
-			Main.current = OtherFunctions.sortList(Main.current); //Sorts the list
-			for (int i = 0; i < Main.rasterizers.length; i++) { //Tells the rasterizers to start
-				Main.rasterizers[i].isDone = false;
+			Main.display.currentScene.current = OtherFunctions.sortList(Main.display.currentScene.current); //Sorts the list
+			for (int i = 0; i < Main.display.rasterizers.length; i++) { //Tells the rasterizers to start
+				Main.display.rasterizers[i].isDone = false;
 			}
 		}
 	}
 
 	public boolean readyToUpdate() {
-		for (int i = 0; i < Main.rasterizers.length; i++) {
-			if (Main.rasterizers[i].isDone == false) {
+		for (int i = 0; i < Main.display.rasterizers.length; i++) {
+			if (Main.display.rasterizers[i].isDone == false) {
 				return false;
 			}
 		}

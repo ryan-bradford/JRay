@@ -23,7 +23,8 @@ public class Polygon3D {
 	
 	public void updateDistance() { //Gets the farthest points distance from the camera
 		int maxID = 0;			   //Used to order how the ColoredPolygons are drawn
-		Line[] current = getLinesToPoint(Main.cameraLocation);
+		System.out.println(Main.display);
+		Line[] current = getLinesToPoint(Main.display.currentScene.cameraLocation);
 		for(int i = 1; i < current.length; i++) {
 			if(current[i].length < current[maxID].length) {
 				maxID = i;
@@ -43,10 +44,10 @@ public class Polygon3D {
 	public void rasterizeToScreen() { //Rasterizes the polygon
 		int[] xs = new int[myPoints.length];
 		int[] ys = new int[myPoints.length];
-		Line[] lines = getLinesToPoint(Main.cameraLocation); //Gets the lines to the camera
+		Line[] lines = getLinesToPoint(Main.display.currentScene.cameraLocation); //Gets the lines to the camera
 		for(int i = 0; i < lines.length; i++) {
-			xs[i] = Main.find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
-			ys[i] = Main.find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
+			xs[i] = Main.display.find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
+			ys[i] = Main.display.find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys, image);
 	}

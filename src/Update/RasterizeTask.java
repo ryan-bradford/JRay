@@ -19,12 +19,12 @@ public class RasterizeTask extends Task {
 	
 	@Override
 	public void runTask() { //Runs once for every time the updater runs
-		if (!Main.paused && !isDone) { //Rasterizes the polygons it needs to that are within its range
-			lowerRange = (int) (Main.current.size() * percent * orderNum);
-			upperRange = (int) (Main.current.size() * percent * (orderNum + 1));
+		if (!Main.display.paused && !isDone) { //Rasterizes the polygons it needs to that are within its range
+			lowerRange = (int) (Main.display.currentScene.current.size() * percent * orderNum);
+			upperRange = (int) (Main.display.currentScene.current.size() * percent * (orderNum + 1));
 			for(int i = lowerRange; i < upperRange; i++) {
 				try {
-					Main.current.get(i).rasterizeToScreen(); //Sets a buffer polygon
+					Main.display.currentScene.current.get(i).rasterizeToScreen(); //Sets a buffer polygon
 				} catch(ArrayIndexOutOfBoundsException ex) {
 					
 				}
