@@ -1,10 +1,10 @@
 package Controls;
 
 import java.awt.Color;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import Other.OtherFunctions;
 import main.Main;
 
 public class KeyControls implements KeyListener {

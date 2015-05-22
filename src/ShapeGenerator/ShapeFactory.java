@@ -19,19 +19,19 @@ public class ShapeFactory { // Creates some polygons
 		myID = ID;
 	}
 	
-	public Polygon3D[] generateSquare(int cornerX, int cornerY, int cornerZ, int width) { // Stetches X - Z
+	public Polygon3D[] generateSquare(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
 		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
 		Point3D p2 = new Point3D(cornerX, cornerY, cornerZ + width); // Above Corner
 		Point3D p3 = new Point3D(cornerX + width, cornerY, cornerZ + width); // Opposite Corner
 		Point3D p4 = new Point3D(cornerX + width, cornerY, cornerZ);// To the left of the corner
 		Point3D[] points = new Point3D[]{p1, p2, p3, p4};
-		Polygon3D mine = new Polygon3D(points, new Color(0, 255, 0), null, myID);
+		Polygon3D mine = new Polygon3D(points, toColor, null, myID);
 		Polygon3D[] toReturn = new Polygon3D[1];
 		toReturn[0] = mine;
 		return toReturn;
 	}
 
-	public Polygon3D[] generateCube(int cornerX, int cornerY, int cornerZ, int width) { // Stetches X - Z
+	public Polygon3D[] generateCube(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
 		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
 		Point3D p2 = new Point3D(cornerX, cornerY, cornerZ + width);
 		Point3D p3 = new Point3D(cornerX + width, cornerY, cornerZ + width);
@@ -46,12 +46,12 @@ public class ShapeFactory { // Creates some polygons
 		Point3D[] f4Points = new Point3D[]{p2, p3, p7, p6};// Top
 		Point3D[] f5Points = new Point3D[]{p4, p3, p7, p8};// Right
 		Point3D[] f6Points = new Point3D[]{p5, p6, p7, p8};// Back
-		Polygon3D f1 = new Polygon3D(f1Points, new Color(0, 255, 0), null, myID);
-		Polygon3D f2 = new Polygon3D(f2Points, new Color(0, 255, 0), null, myID);
-		Polygon3D f3 = new Polygon3D(f3Points, new Color(0, 255, 0), null, myID);
-		Polygon3D f4 = new Polygon3D(f4Points, new Color(0, 255, 0), null, myID);
-		Polygon3D f5 = new Polygon3D(f5Points, new Color(0, 255, 0), null, myID);
-		Polygon3D f6 = new Polygon3D(f6Points, new Color(0, 255, 0), null, myID);
+		Polygon3D f1 = new Polygon3D(f1Points, toColor, null, myID);
+		Polygon3D f2 = new Polygon3D(f2Points, toColor, null, myID);
+		Polygon3D f3 = new Polygon3D(f3Points, toColor, null, myID);
+		Polygon3D f4 = new Polygon3D(f4Points, toColor, null, myID);
+		Polygon3D f5 = new Polygon3D(f5Points, toColor, null, myID);
+		Polygon3D f6 = new Polygon3D(f6Points, toColor, null, myID);
 		Polygon3D[] toReturn = new Polygon3D[6];
 		toReturn[0] = f1;
 		toReturn[1] = f2;

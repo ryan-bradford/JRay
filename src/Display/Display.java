@@ -1,17 +1,15 @@
 package Display;
 
 import java.awt.Cursor;
+
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import main.Main;
 import Controls.KeyControls;
 import Controls.MouseMoverTask;
-import Other.OtherFunctions;
 import Other.ScreenPointFinder;
 import Scene.Scene;
 import Thread.TaskManager;
@@ -91,6 +89,10 @@ public class Display extends JFrame { // Just a holder for a JPanel
 
 	public void setScene(Scene toSet) {
 		currentScene = toSet;
+	}
+	
+	public void removeScene() {
+		currentScene = null;
 	}
 	
 	public double findLowestAngle(double angle) { //Finds the smallest angle in the domain of -FOV - 2PI + FOV

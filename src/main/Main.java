@@ -1,23 +1,12 @@
 package main;
 
 import java.awt.Toolkit;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-
-import Controls.KeyControls;
-import Controls.MouseMoverTask;
 import Display.Display;
-import Geometry.ColoredPolygon;
-import Geometry.Point3D;
-import Geometry.Polygon3D;
-import Other.OtherFunctions;
-import Other.ScreenPointFinder;
 import Scene.Scene;
-import ShapeGenerator.ShapeFactory;
-import Thread.TaskManager;
-import Update.UpdateTask;
-import Update.RasterizeTask;
 
 public class Main { //The class the begins the engine
 					//It also manages and stores the engines objects
@@ -29,7 +18,11 @@ public class Main { //The class the begins the engine
 
 	public static void main(String[] args) { //The main method, starts the engine
 		createDisplay();
+		createDisplay();
+		Scene myScene = new Scene(0);
 		displays.get(0).addScene(new Scene(0));
+		displays.get(1).addScene(myScene.switchScreens(1));
+		myScene = null;
 	}
 
 	public static void createDisplay() { //Inits and Makes the JFrame visible

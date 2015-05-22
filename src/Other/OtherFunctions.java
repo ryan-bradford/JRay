@@ -1,17 +1,14 @@
 package Other;
 
 import java.awt.AlphaComposite;
-import java.awt.Cursor;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import Geometry.Polygon3D;
-import main.Main;
 
 public class OtherFunctions {
 	

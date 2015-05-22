@@ -2,6 +2,7 @@ package Controls;
 
 import java.awt.AWTException;
 
+
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -9,7 +10,6 @@ import java.awt.Robot;
 
 import main.Main;
 
-import Other.OtherFunctions;
 import Thread.Task;
 
 public class MouseMoverTask extends Task {

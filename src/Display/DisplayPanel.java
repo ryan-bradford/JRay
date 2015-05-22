@@ -1,6 +1,7 @@
 package Display;
 
 import java.awt.BasicStroke;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,8 +11,6 @@ import javax.swing.JPanel;
 
 import main.Main;
 import Geometry.ColoredPolygon;
-import Geometry.Polygon3D;
-import Other.OtherFunctions;
 
 public class DisplayPanel extends JPanel {
 

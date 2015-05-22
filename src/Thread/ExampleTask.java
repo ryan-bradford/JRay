@@ -1,11 +1,5 @@
 package Thread;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Robot;
-
-import main.Main;
-
 public class ExampleTask extends Task {
 
 	@Override

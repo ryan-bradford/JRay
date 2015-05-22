@@ -1,9 +1,9 @@
 package Geometry;
 
 import java.awt.Color;
+
 import java.awt.Image;
 
-import Other.ScreenPointFinder;
 import main.Main;
 
 public class Polygon3D {
@@ -24,7 +24,6 @@ public class Polygon3D {
 	
 	public void updateDistance() { //Gets the farthest points distance from the camera
 		int maxID = 0;			   //Used to order how the ColoredPolygons are drawn
-		System.out.println(Main.displays.get(myID));
 		Line[] current = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation);
 		for(int i = 1; i < current.length; i++) {
 			if(current[i].length < current[maxID].length) {
@@ -51,6 +50,10 @@ public class Polygon3D {
 			ys[i] = Main.displays.get(myID).find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys, image);
+	}
+	
+	public void changeID(int newID) {
+		myID = newID;
 	}
 	
 }
