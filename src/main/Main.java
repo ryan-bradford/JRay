@@ -25,25 +25,20 @@ public class Main { //The class the begins the engine
 	public static int screenHeight = Toolkit.getDefaultToolkit()
 			.getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static Display display; //The JFrame which stuff is drawn on
-	public static TaskManager manage; //The thing that allocates "Tasks" to different CPU Cores
+	public static ArrayList<Display> displays = new ArrayList<Display>();
 
 	public static void main(String[] args) { //The main method, starts the engine
-		initTaskManager();
 		createDisplay();
-		OtherFunctions.hideCursor(true);
-		display.addScene(new Scene());
+		displays.get(0).addScene(new Scene(0));
 	}
 
 	public static void createDisplay() { //Inits and Makes the JFrame visible
-		display = new Display(screenWidth, screenHeight);
-		display.pack();
-		display.setBounds(0, 0, screenWidth, screenHeight);
-		display.setVisible(true);
-		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		displays.add(new Display(screenWidth, screenHeight, displays.size()));
+		displays.get(displays.size() - 1).pack();
+		displays.get(displays.size() - 1).setBounds(0, 0, screenWidth, screenHeight);
+		displays.get(displays.size() - 1).setVisible(true);
+		displays.get(displays.size() - 1).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		displays.get(displays.size() - 1).hideCursor(false);
 	}
 
-	public static void initTaskManager() { //Makes some stuff not null
-		manage = new TaskManager();
-	}
 }

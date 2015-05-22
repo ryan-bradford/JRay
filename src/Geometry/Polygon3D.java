@@ -13,18 +13,19 @@ public class Polygon3D {
 	public double distanceFromCamera;
 	public Image image;
 	public ColoredPolygon myPoly; 
+	int myID;
 	
-	public Polygon3D(Point3D[] toAdd, Color toColor, Image image) { //The 3D Polygon Object
+	public Polygon3D(Point3D[] toAdd, Color toColor, Image image, int ID) { //The 3D Polygon Object
 		myColor = toColor;
 		myPoints = toAdd;
 		this.image = image;
-		updateDistance();
+		myID = ID;
 	}
 	
 	public void updateDistance() { //Gets the farthest points distance from the camera
 		int maxID = 0;			   //Used to order how the ColoredPolygons are drawn
-		System.out.println(Main.display);
-		Line[] current = getLinesToPoint(Main.display.currentScene.cameraLocation);
+		System.out.println(Main.displays.get(myID));
+		Line[] current = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation);
 		for(int i = 1; i < current.length; i++) {
 			if(current[i].length < current[maxID].length) {
 				maxID = i;
@@ -44,10 +45,10 @@ public class Polygon3D {
 	public void rasterizeToScreen() { //Rasterizes the polygon
 		int[] xs = new int[myPoints.length];
 		int[] ys = new int[myPoints.length];
-		Line[] lines = getLinesToPoint(Main.display.currentScene.cameraLocation); //Gets the lines to the camera
+		Line[] lines = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation); //Gets the lines to the camera
 		for(int i = 0; i < lines.length; i++) {
-			xs[i] = Main.display.find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
-			ys[i] = Main.display.find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
+			xs[i] = Main.displays.get(myID).find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
+			ys[i] = Main.displays.get(myID).find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys, image);
 	}

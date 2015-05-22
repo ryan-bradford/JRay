@@ -22,10 +22,12 @@ public class DisplayPanel extends JPanel {
 	int FPS = 0;
 	int fullFPS = 0;
 	double lastTime = System.currentTimeMillis();
+	int myID;
 
-	public DisplayPanel(int screenWidth, int screenHeight) {
+	public DisplayPanel(int screenWidth, int screenHeight, int ID) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
+		myID = ID;
 	}
 
 	@Override
@@ -36,13 +38,13 @@ public class DisplayPanel extends JPanel {
 		g2.fillRect(0, 0, screenWidth, screenHeight); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
-			for (int i = 0; i < Main.display.currentScene.current.size(); i++) {
+			for (int i = 0; i < Main.displays.get(myID).currentScene.current.size(); i++) {
 				try {
-					g2.setColor(Main.display.currentScene.current.get(i).myPoly.myColor);
-					g2.fillPolygon(Main.display.currentScene.current.get(i).myPoly);// Draws the rasterized polygon
-					if (Main.display.currentScene.current.get(i).myPoly.img != null) {
-						g2.drawImage(Main.display.currentScene.current.get(i).myPoly.img, (int) (Main.display.currentScene.current.get(i).myPoly.minX),
-								(int) (Main.display.currentScene.current.get(i).myPoly.minY), null);// Draws its image (if needed)
+					g2.setColor(Main.displays.get(myID).currentScene.current.get(i).myPoly.myColor);
+					g2.fillPolygon(Main.displays.get(myID).currentScene.current.get(i).myPoly);// Draws the rasterized polygon
+					if (Main.displays.get(myID).currentScene.current.get(i).myPoly.img != null) {
+						g2.drawImage(Main.displays.get(myID).currentScene.current.get(i).myPoly.img, (int) (Main.displays.get(myID).currentScene.current.get(i).myPoly.minX),
+								(int) (Main.displays.get(myID).currentScene.current.get(i).myPoly.minY), null);// Draws its image (if needed)
 					}
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();

@@ -14,20 +14,6 @@ import Geometry.Polygon3D;
 import main.Main;
 
 public class OtherFunctions {
-
-	public static void hideCursor(boolean hideOrShow) { // True is hide, false
-														// is show
-		if (hideOrShow) {								//Hides the cursor
-			BufferedImage cursorImg = new BufferedImage(16, 16,//Makes it a blank cursor
-					BufferedImage.TYPE_INT_ARGB);
-			Cursor blankCursor = Toolkit.getDefaultToolkit()
-					.createCustomCursor(cursorImg, new Point(0, 0),
-							"blank cursor");
-			Main.display.getContentPane().setCursor(blankCursor);
-		} else {
-			Main.display.getContentPane().setCursor(Cursor.getDefaultCursor()); //Shows the cursor, makes it the default
-		}
-	}
 	
 	public static ArrayList<Polygon3D> sortList(ArrayList<Polygon3D> toBeSorted) { //Sorts the list of polygons
 		ArrayList<Polygon3D> sorted = new ArrayList<Polygon3D>();				   //Based on their distance from the camera
