@@ -20,25 +20,25 @@ public class KeyControls implements KeyListener {
 	public void keyPressed(KeyEvent e) { //Different key controls
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_A) {//Move left based on your rotation
-			Main.displays.get(myID).currentScene.cameraLocation.xPos -= 10 * Math.cos(Main.displays.get(myID).xAngle); 
-			Main.displays.get(myID).currentScene.cameraLocation.yPos += 10 * Math.sin(Main.displays.get(myID).xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.xPos -= 10 * Math.cos(Main.displays.get(myID).currentScene.xAngle); 
+			Main.displays.get(myID).currentScene.cameraLocation.yPos += 10 * Math.sin(Main.displays.get(myID).currentScene.xAngle);
 		}
 		
 		if (key == KeyEvent.VK_D) {//Move right based on your rotation
-			Main.displays.get(myID).currentScene.cameraLocation.xPos += 10 * Math.cos(Main.displays.get(myID).xAngle);
-			Main.displays.get(myID).currentScene.cameraLocation.yPos -= 10 * Math.sin(Main.displays.get(myID).xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.xPos += 10 * Math.cos(Main.displays.get(myID).currentScene.xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.yPos -= 10 * Math.sin(Main.displays.get(myID).currentScene.xAngle);
 		}
 		
 		if (key == KeyEvent.VK_W) {//Move forwards based on your rotation
 			//Main.cameraLocation.zPos += 10 * Math.sin(Main.yAngle);
-			Main.displays.get(myID).currentScene.cameraLocation.xPos += 10 * Math.sin(Main.displays.get(myID).xAngle);
-			Main.displays.get(myID).currentScene.cameraLocation.yPos += 10 * Math.cos(Main.displays.get(myID).xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.xPos += 10 * Math.sin(Main.displays.get(myID).currentScene.xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.yPos += 10 * Math.cos(Main.displays.get(myID).currentScene.xAngle);
 		}
 		
 		if (key == KeyEvent.VK_S) {//Move backwards based on your rotation
 			//Main.cameraLocation.zPos -= 10 * Math.sin(Main.yAngle);
-			Main.displays.get(myID).currentScene.cameraLocation.xPos -= 10 * Math.sin(Main.displays.get(myID).xAngle);
-			Main.displays.get(myID).currentScene.cameraLocation.yPos -= 10 * Math.cos(Main.displays.get(myID).xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.xPos -= 10 * Math.sin(Main.displays.get(myID).currentScene.xAngle);
+			Main.displays.get(myID).currentScene.cameraLocation.yPos -= 10 * Math.cos(Main.displays.get(myID).currentScene.xAngle);
 		}
 		
 		if (key == KeyEvent.VK_E) {//Move down 

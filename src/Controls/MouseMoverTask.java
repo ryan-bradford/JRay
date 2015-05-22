@@ -44,12 +44,12 @@ public class MouseMoverTask extends Task {
 				Point point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
 				currentX = (int) point.getX();
 				currentY = (int) point.getY();
-				double xAngle = Main.displays.get(myID).xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / Main.displays.get(myID).sensitivity
+				double xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / Main.displays.get(myID).sensitivity
 						* (currentX - Main.screenWidth / 2); //Calculate xAngle moved
-				double yAngle = Main.displays.get(myID).yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / Main.displays.get(myID).sensitivity
+				double yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / Main.displays.get(myID).sensitivity
 						* (currentY - Main.screenHeight / 2);//Calculate yAngle moved
-				Main.displays.get(myID).xAngle = xAngle;
-				Main.displays.get(myID).yAngle = yAngle;
+				Main.displays.get(myID).currentScene.xAngle = xAngle;
+				Main.displays.get(myID).currentScene.yAngle = yAngle;
 				toMoveOrCalculate = true;
 			}
 		}

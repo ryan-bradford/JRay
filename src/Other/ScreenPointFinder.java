@@ -15,7 +15,7 @@ public class ScreenPointFinder {
 		if (Main.displays.get(myID).getBounds().getWidth() < Main.displays.get(myID).getBounds().getHeight()) { // Changes the FOV based on the width to height ratio
 			currentFOV *= (double) (Main.displays.get(myID).getContentPane().getWidth()) / (double) (Main.displays.get(myID).getContentPane().getHeight());
 		}
-		double angle = Main.displays.get(myID).findLowestAngle(widthAngle - Main.displays.get(myID).xAngle); // Makes sure it is the smallest angle within the 2PI domain
+		double angle = Main.displays.get(myID).findLowestAngle(widthAngle - Main.displays.get(myID).currentScene.xAngle); // Makes sure it is the smallest angle within the 2PI domain
 																				// Corrects for camera X Rotation
 		double initAngle = angle + currentFOV / 2; // Creates the angle to calculate on
 													// Adds FOV/2 because 0 radians is the center of the screen
@@ -30,7 +30,7 @@ public class ScreenPointFinder {
 		if (Main.displays.get(myID).getContentPane().getHeight() < Main.displays.get(myID).getContentPane().getWidth()) {
 			currentFOV *= (double) (Main.displays.get(myID).getContentPane().getHeight()) / (double) (Main.displays.get(myID).getContentPane().getWidth());
 		}
-		double angle = Main.displays.get(myID).findLowestAngle(heightAngle - Main.displays.get(myID).yAngle);
+		double angle = Main.displays.get(myID).findLowestAngle(heightAngle - Main.displays.get(myID).currentScene.yAngle);
 		double initAngle = angle;
 		//System.out.println(initAngle);
 		double changePerMove = currentFOV / Main.displays.get(myID).getContentPane().getHeight();

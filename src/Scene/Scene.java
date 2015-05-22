@@ -13,6 +13,8 @@ public class Scene {
 	public ArrayList<Polygon3D> current; //The polygons that should be rasterized
 	public Point3D cameraLocation = new Point3D(0, 0, 0);
 	public int myID;
+	public double xAngle = 0; // The camera rotation to the x
+	public double yAngle = 0; // The camera rotation to the Y
 
 	//Stores a bunch of polygons to load to the display
 	
@@ -51,6 +53,8 @@ public class Scene {
 			list.get(i).changeID(newID);
 		}
 		stuff.current = list;
+		stuff.xAngle = xAngle;
+		stuff.yAngle = yAngle;
 		stuff.cameraLocation = cameraLocation;
 		factory = new ShapeFactory(newID);
 		return stuff;
