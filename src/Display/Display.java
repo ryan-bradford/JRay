@@ -1,13 +1,13 @@
 package Display;
 
 import java.awt.Cursor;
-
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import main.Main;
 import Controls.KeyControls;
 import Controls.MouseMoverTask;
 import Other.ScreenPointFinder;
@@ -31,6 +31,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public double sensitivity = 2; // The sensitivity of the mouse, range of 1 to 10
 	public int myID;
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
+	public int screenOffset = 0;
 
 	public Display(int screenWidth, int screenHeight, int ID) { // Inits the display panel
 		initTaskManager();

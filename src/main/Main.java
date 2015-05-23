@@ -1,10 +1,10 @@
 package main;
 
 import java.awt.Toolkit;
-
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
 import Display.Display;
 import Scene.Scene;
 
@@ -31,6 +31,8 @@ public class Main { //The class the begins the engine
 		displays.get(thisID).setVisible(true);
 		displays.get(thisID).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		displays.get(thisID).hideCursor(true);
+		displays.get(thisID).screenOffset = Main.screenHeight - displays.get(thisID).getHeight();
+
 	}
 
 }
