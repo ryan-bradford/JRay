@@ -37,8 +37,7 @@ public class MouseMoverTask extends Task {
 			if (toMoveOrCalculate) {
 				mouseMover.mouseMove((int)(Main.screenWidth / 2),
 						(int)(Main.screenHeight / 2)); //Center mouse
-				System.out.println(Main.displays.get(myID).screenOffset);
-				Main.displays.get(myID).setBounds((Main.screenWidth - Main.displays.get(myID).getWidth()) / 2, (Main.screenHeight - Main.displays.get(myID).getHeight()) / 2 - Main.displays.get(myID).screenOffset,
+				Main.displays.get(myID).setBounds((Main.screenWidth - Main.displays.get(myID).getWidth()) / 2, (Main.screenHeight - Main.displays.get(myID).getHeight() - Main.displays.get(myID).screenOffset) / 2,
 						Main.displays.get(myID).getWidth(), Main.displays.get(myID).getHeight()); //Center and resize window
 				toMoveOrCalculate = false; //Go to the other stage
 			} else {
