@@ -32,7 +32,9 @@ public class ColoredPolygon extends Polygon { //A sub-object of polygon
 
 		double width = maxX - minX;
 		double height = maxY - minY;
-		img = OtherFunctions.resizeImg(myImage, (int)(width), (int)(height));
+		if(myImage != null) {
+			img = OtherFunctions.resizeImg(myImage, (int)(width), (int)(height));
+		}
 	}
 	
 }

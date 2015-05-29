@@ -44,7 +44,7 @@ public class DisplayPanel extends JPanel {
 	}
 
 	void displaySystemInfo(Graphics2D g2) {
-		String[] stringsToDraw = new String[9];
+		String[] stringsToDraw = new String[10];
 		timePassed += System.currentTimeMillis() - lastTime; // Record FPS
 		lastTime = System.currentTimeMillis();
 		FPS = FPS + 1;
@@ -55,21 +55,21 @@ public class DisplayPanel extends JPanel {
 		}
 		g2.setColor(Color.YELLOW); // Draw FPS
 		Runtime runtime = Runtime.getRuntime();
-		NumberFormat format = NumberFormat.getInstance();
 		long maxMemory = runtime.maxMemory();
 		long allocatedMemory = runtime.totalMemory();
 		long freeMemory = runtime.freeMemory();
 		stringsToDraw[0] = "FPS: " + Integer.toString(fullFPS);
-		stringsToDraw[1] = ("Free Memory: " + format.format(freeMemory / 1024 / 1024));
-		stringsToDraw[2] = ("Allocated Memory: " + format.format(allocatedMemory / 1024 / 1024));
-		stringsToDraw[3] = ("Max Memory: " + format.format(maxMemory / 1024 / 1024));
-		stringsToDraw[4] = ("Total Free Memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024 / 1024));
-		stringsToDraw[5] = "OS: " + System.getProperty("os.name");
-		stringsToDraw[6] = "OS Version: " + System.getProperty("os.version");
-		stringsToDraw[7] = "OS Architecture: " + System.getProperty("os.arch");
-		stringsToDraw[8] = "0%";
+		stringsToDraw[1] = ("Free Memory: " +  (freeMemory / 1024 / 256));
+		stringsToDraw[2] = ("Allocated Memory: " + (allocatedMemory / 1024 / 256));
+		stringsToDraw[3] = ("Used Memory: " +  ((allocatedMemory - freeMemory) / 1024 / 256));
+		stringsToDraw[4] = ("Max Memory: " +  (maxMemory / 1024 / 256));
+		stringsToDraw[5] = ("Total Free Memory: " +  ((freeMemory + (maxMemory - allocatedMemory)) / 1024 / 256));
+		stringsToDraw[6] = "OS: " + System.getProperty("os.name");
+		stringsToDraw[7] = "OS Version: " + System.getProperty("os.version");
+		stringsToDraw[8] = "OS Architecture: " + System.getProperty("os.arch");
+		stringsToDraw[9] = "0%";
 		try {
-			stringsToDraw[8] = "CPU Usage: " + getProcessCpuLoad();
+			stringsToDraw[9] = "CPU Usage: " + getProcessCpuLoad();
 		} catch (MalformedObjectNameException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,6 +100,8 @@ public class DisplayPanel extends JPanel {
 					}
 				} catch (NullPointerException ex) {
 					// ex.printStackTrace();
+				} catch(IndexOutOfBoundsException ex) {
+					
 				}
 			}
 		} catch (NullPointerException ex) {
@@ -108,7 +110,6 @@ public class DisplayPanel extends JPanel {
 	}
 	
 	public static double getProcessCpuLoad() throws MalformedObjectNameException, ReflectionException, InstanceNotFoundException {
-
 	    MBeanServer mbs    = ManagementFactory.getPlatformMBeanServer();
 	    ObjectName name    = ObjectName.getInstance("java.lang:type=OperatingSystem");
 	    AttributeList list = mbs.getAttributes(name, new String[]{ "ProcessCpuLoad" });
