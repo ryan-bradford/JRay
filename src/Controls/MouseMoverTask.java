@@ -4,12 +4,12 @@ import java.awt.AWTException;
 
 
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
 import main.Main;
-
 import Thread.Task;
 
 public class MouseMoverTask extends Task {
@@ -35,7 +35,6 @@ public class MouseMoverTask extends Task {
 	public void runTask() { // The default task object
 		if (!Main.displays.get(myID).paused) {
 			if (toMoveOrCalculate) {
-				
 				mouseMover.mouseMove((int)(Main.screenWidth / 2),
 						(int)(Main.screenHeight / 2)); //Center mouse
 				Main.displays.get(myID).setBounds((Main.screenWidth - Main.displays.get(myID).getWidth()) / 2, (Main.screenHeight - Main.displays.get(myID).getHeight() - Main.displays.get(myID).screenOffset) / 2,
