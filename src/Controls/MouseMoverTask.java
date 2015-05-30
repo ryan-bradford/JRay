@@ -55,9 +55,8 @@ public class MouseMoverTask extends Task {
 		}
 		if(!Main.displays.get(myID).isActive() && !Main.displays.get(myID).paused) {//Pauses the game if you move the window to the background
 			Main.displays.get(myID).paused = true;
-			Main.displays.get(myID).display.background = new Color(255, 0, 0);
+			Main.displays.get(myID).display.pauseGame();
 			Main.displays.get(myID).hideCursor(false);
-			Main.displays.get(myID).keyControls.blackOrRed = false;
 			Main.displays.get(myID).repaint();
 		}
 	}

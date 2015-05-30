@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import main.Main;
-import Controls.KeyControls;
+import Controls.MainKeyControls;
 import Controls.MouseMoverTask;
 import Other.ScreenPointFinder;
 import Scene.Scene;
@@ -21,7 +21,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public DisplayPanel display;
 	public RasterizeTask[] rasterizers; // The tasks which do the rasterization
 	public UpdateTask update; // The class that orders how stuff should be drawn and what should be drawn
-	public KeyControls keyControls; // The class that control the camera movement
+	public MainKeyControls keyControls; // The class that control the camera movement
 	public boolean paused = false; // Whether the engine is paused or not
 	public ScreenPointFinder find; // The algorithm that changes angle to pixel
 	MouseMoverTask mover; // The task which controls mouse and window centering
@@ -33,11 +33,11 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
 	public int screenOffset = 0;
 
-	public Display(int screenWidth, int screenHeight, int ID) { // Inits the display panel
+	public Display(int ID) { // Inits the display panel
 		initTaskManager();
 		myID = ID;
-		display = new DisplayPanel(screenWidth, screenHeight, myID);
-		display.setBounds(0, 0, screenWidth, screenHeight);
+		display = new DisplayPanel(myID);
+		display.setBounds(0, 0, Main.screenWidth, Main.screenHeight);
 		add(display);
 		initPointFinder();
 		initUserControls();
@@ -48,6 +48,10 @@ public class Display extends JFrame { // Just a holder for a JPanel
 		currentScene = toLoad;
 	}
 
+	public void updateKeyControls() {
+		this.addKeyListener(keyControls);
+	}
+	
 	public void hideCursor(boolean hideOrShow) { // True is hide, false
 		// is show
 		if (hideOrShow) { // Hides the cursor
@@ -80,8 +84,8 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	}
 
 	public void initUserControls() { // Starts the user controls
-		keyControls = new KeyControls(myID);
-		this.addKeyListener(keyControls);
+		keyControls = new MainKeyControls(myID);
+		updateKeyControls();
 		mover = new MouseMoverTask(myID);
 		myManage.addTask(mover);
 	}

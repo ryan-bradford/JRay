@@ -24,7 +24,7 @@ public class Main { // The class the begins the engine
 	}
 
 	public static void createDisplay() { // Inits and Makes the JFrame visible
-		displays.add(new Display(screenWidth, screenHeight, displays.size()));
+		displays.add(new Display(displays.size()));
 		int thisID = displays.size() - 1;
 		displays.get(thisID).pack();
 		displays.get(thisID).setBounds(0, 0, (int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth()),
@@ -33,6 +33,8 @@ public class Main { // The class the begins the engine
 		displays.get(thisID).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		displays.get(thisID).hideCursor(true);
 		displays.get(thisID).screenOffset = (int) ((int) (screenHeight) - GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight());
+		displays.get(thisID).display.loadSettings();
+		displays.get(thisID).setLayout(null);
 	}
 
 }

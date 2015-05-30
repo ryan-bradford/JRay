@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.lang.management.ManagementFactory;
-import java.text.NumberFormat;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -20,8 +19,6 @@ import main.Main;
 
 public class DisplayPanel extends JPanel {
 
-	int screenWidth = 0;
-	int screenHeight = 0;
 	int textGap = 14;
 	public Color background = new Color(0, 0, 0);
 	double timePassed;
@@ -29,18 +26,22 @@ public class DisplayPanel extends JPanel {
 	int fullFPS = 0;
 	double lastTime = System.currentTimeMillis();
 	int myID;
+	public boolean showDebugInfo = true;
+	SettingsScreen settings;
 
-	public DisplayPanel(int screenWidth, int screenHeight, int ID) {
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
+	public DisplayPanel(int ID) {
 		myID = ID;
+		this.setLayout(null);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) (g);
+		super.paintComponent(g2);
 		displayScene(g2);
-		displaySystemInfo(g2);
+		if(showDebugInfo) {
+			displaySystemInfo(g2);
+		}
 	}
 
 	void displaySystemInfo(Graphics2D g2) {
@@ -87,7 +88,7 @@ public class DisplayPanel extends JPanel {
 
 	void displayScene(Graphics2D g2) {
 		g2.setColor(background); // Sets the background color
-		g2.fillRect(0, 0, screenWidth, screenHeight); // Draws the background
+		g2.fillRect(0, 0, this.getWidth(), this.getHeight()); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
 			for (int i = 0; i < Main.displays.get(myID).currentScene.current.size(); i++) {
@@ -109,8 +110,40 @@ public class DisplayPanel extends JPanel {
 		}
 	}
 	
-	public static double getProcessCpuLoad() throws MalformedObjectNameException, ReflectionException, InstanceNotFoundException {
-	    MBeanServer mbs    = ManagementFactory.getPlatformMBeanServer();
+	public void pauseGame() {
+		Main.displays.get(myID).paused = true;
+		Main.displays.get(myID).hideCursor(false);
+		this.setFocusable(false);
+		Main.displays.get(myID).setFocusable(false);
+		settings.setFocusable(true);
+		settings.setVisible(true);
+		settings.requestFocus();
+		settings.repaint();
+		Main.displays.get(myID).repaint();
+	}
+	
+	public void startEngine() {
+		Main.displays.get(myID).updateKeyControls();
+		Main.displays.get(myID).paused = false;
+		Main.displays.get(myID).hideCursor(true);
+		settings.setVisible(false);
+		settings.setFocusable(false);
+		Main.displays.get(myID).setFocusable(true);
+		Main.displays.get(myID).requestFocus();
+		Main.displays.get(myID).repaint();
+	}
+	
+	public void loadSettings() {
+		settings = new SettingsScreen(myID);
+		settings.setBounds(0, 0, Main.displays.get(myID).getWidth(), Main.displays.get(myID).getHeight());
+		settings.setVisible(false);
+		settings.setFocusable(false);
+		settings.repaint();
+		add(settings);
+	}
+	
+	public double getProcessCpuLoad() throws MalformedObjectNameException, ReflectionException, InstanceNotFoundException {
+		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 	    ObjectName name    = ObjectName.getInstance("java.lang:type=OperatingSystem");
 	    AttributeList list = mbs.getAttributes(name, new String[]{ "ProcessCpuLoad" });
 

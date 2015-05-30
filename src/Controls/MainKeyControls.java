@@ -1,18 +1,15 @@
 package Controls;
 
-import java.awt.Color;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import main.Main;
 
-public class KeyControls implements KeyListener {
+public class MainKeyControls implements KeyListener {
 
-	boolean blackOrRed = true; //True is black, false is red
 	int myID;
 	
-	public KeyControls(int ID) {
+	public MainKeyControls(int ID) {
 		myID = ID;
 	}
 	
@@ -50,17 +47,9 @@ public class KeyControls implements KeyListener {
 		}
 		
 		if(key == KeyEvent.VK_ESCAPE) { //Pause and unpause the engine
-			Main.displays.get(myID).paused = !Main.displays.get(myID).paused;
-			if(blackOrRed) {
-				Main.displays.get(myID).display.background = new Color(255, 0, 0);
-				Main.displays.get(myID).hideCursor(false);
-				blackOrRed = false;
-				Main.displays.get(myID).repaint();
-			} else {
-				Main.displays.get(myID).display.background = new Color(0, 0, 0);
-				Main.displays.get(myID).hideCursor(true);
-				blackOrRed = true;
-				Main.displays.get(myID).repaint();
+			if(!Main.displays.get(myID).paused) {
+				Main.displays.get(myID).paused = true;
+				Main.displays.get(myID).display.pauseGame();
 			}
 		}
 		
