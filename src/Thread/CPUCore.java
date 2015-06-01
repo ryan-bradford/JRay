@@ -5,7 +5,6 @@ import java.util.ArrayList;
 //One core in the CPU will run one thread
 public class CPUCore extends Thread { // A Single thread that handles a passed list of processes
 	public ArrayList<Task> tasks; // The ammount of tasks assigned
-	ArrayList<Integer> waits; // The pause inbetween opperations of a single task
 	ArrayList<Integer> numShortWaitsPassed; // Counts the number of short waits that have passed for each task
 	Integer shortestWait; // The shortest wait of all the tasks
 	int load; // What is the total "load" gave by this thread (Is entireley arbritrary)
@@ -14,14 +13,12 @@ public class CPUCore extends Thread { // A Single thread that handles a passed l
 	public CPUCore(ArrayList<Task> tasks1) { // Inits the core to a list of tasks, this task list is most commonly passed as null
 		load = 0;
 		tasks = new ArrayList<Task>();
-		waits = new ArrayList<Integer>();
 		numShortWaitsPassed = new ArrayList<Integer>();
 		try {
 			if (tasks1 != null) {
 				tasks = tasks1;
 			}
 			for (int i = 0; i < tasks.size(); i++) { // Finds the shortest wait
-				waits.set(i, tasks.get(i).getWait());
 				numShortWaitsPassed.set(i, 0);
 			}
 			shortestWait = 1;
@@ -42,7 +39,7 @@ public class CPUCore extends Thread { // A Single thread that handles a passed l
 				for (int i = 0; i < tasks.size(); i++) { // Calculates if the shortest wait adds up to the wait of the selected
 															// It does this by multiplying the short wait count by the short wait
 															// And checks if it is >= to the wait of the task
-					if (numShortWaitsPassed.get(i) * shortestWait >= waits.get(i)) { // If it does it will execute the task
+					if (numShortWaitsPassed.get(i) * shortestWait >= tasks.get(i).getWait()) { // If it does it will execute the task
 						numShortWaitsPassed.set(i, 0); // It will reset the short waits passed for said task
 						if (tasks.get(i).returnRunnable() == true) {
 							tasks.get(i).runTask();
@@ -58,8 +55,6 @@ public class CPUCore extends Thread { // A Single thread that handles a passed l
 
 	public int addTask(Task task1) { // Adds a task to the thread
 		tasks.add(task1);
-		waits.add(1000);
-		waits.set(waits.size() - 1, tasks.get(waits.size() - 1).getWait()-tasks.size()/2);
 		numShortWaitsPassed.add(0);
 		load = load + task1.getCPULoad();
 		return tasks.size();

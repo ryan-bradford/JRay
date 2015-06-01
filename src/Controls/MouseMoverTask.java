@@ -1,10 +1,6 @@
 package Controls;
 
 import java.awt.AWTException;
-
-
-import java.awt.Color;
-import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;

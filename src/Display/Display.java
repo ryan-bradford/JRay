@@ -32,6 +32,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public int myID;
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
 	public int screenOffset = 0;
+	public int displayWait = 1; //1000 / FPSLimit - 1 = displayWait
 
 	public Display(int ID) { // Inits the display panel
 		initTaskManager();
