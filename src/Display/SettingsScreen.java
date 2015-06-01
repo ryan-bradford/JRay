@@ -26,14 +26,26 @@ public class SettingsScreen extends JPanel {
 		this.setLayout(null);
 		myID = ID;
 		keys = new PauseKeyControls(myID);
-		showOrHideDebug = new JButton();
+		initDebugButtons();
+		initFPSControls();
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		this.addKeyListener(keys);
+	}
+	
+	private void initDebugButtons() {
+		showOrHideDebug = new JButton("Hide Debug Info");
 		showOrHideDebug.addActionListener(new DebugButtonListener());
-		showOrHideDebug.setText("Hide Debug Info");
+		showOrHideDebug.addKeyListener(keys);
 		width = 150;
 		height = 40;
 		showOrHideDebug.setBounds((Main.displays.get(myID).getWidth() - width) / 2, Main.displays.get(myID).getHeight() / 12, width, height);
-		showOrHideDebug.addKeyListener(keys);
 		add(showOrHideDebug);
+	}
+	
+	private void initFPSControls() {
 		updateFPS = new JTextField("Enter Your FPS Limit: ");
 		width = 150;
 		height = 20;
@@ -48,12 +60,7 @@ public class SettingsScreen extends JPanel {
 		add(updateFPSButton);
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		this.addKeyListener(keys);
-	}
-
-	public class DebugButtonListener implements ActionListener {
+	private class DebugButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			Main.displays.get(myID).display.showDebugInfo = !Main.displays.get(myID).display.showDebugInfo;
@@ -65,10 +72,11 @@ public class SettingsScreen extends JPanel {
 		}
 	}
 
-	public class FPSLimitListener implements ActionListener {
+	private class FPSLimitListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			String fpsText = updateFPS.getText();
+			Main.displays.get(myID).display.saveVARs();
 			int numStart = 0;
 			for (int i = 0; i < fpsText.length(); i++) {
 				if (fpsText.charAt(i) == '1' || fpsText.charAt(i) == '2' || fpsText.charAt(i) == '3' || fpsText.charAt(i) == '4' || fpsText.charAt(i) == '5' || fpsText.charAt(i) == '6'

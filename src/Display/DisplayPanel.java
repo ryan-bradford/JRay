@@ -4,7 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.FileFilter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -20,7 +25,6 @@ import main.Main;
 public class DisplayPanel extends JPanel {
 
 	int textGap = 14;
-	public Color background = new Color(0, 0, 0);
 	double timePassed;
 	int FPS = 0;
 	int fullFPS = 0;
@@ -28,7 +32,11 @@ public class DisplayPanel extends JPanel {
 	int myID;
 	public boolean showDebugInfo = true;
 	SettingsScreen settings;
-
+	ArrayList<Double> CPULoad = new ArrayList<Double>();
+	ArrayList<Double> MemoryLoad = new ArrayList<Double>();
+	ArrayList<Integer> FPSs = new ArrayList<Integer>();
+	
+	
 	public DisplayPanel(int ID) {
 		myID = ID;
 		this.setLayout(null);
@@ -46,6 +54,17 @@ public class DisplayPanel extends JPanel {
 
 	void displaySystemInfo(Graphics2D g2) {
 		String[] stringsToDraw = new String[10];
+		Runtime runtime = Runtime.getRuntime();
+		long maxMemory = runtime.maxMemory();
+		long allocatedMemory = runtime.totalMemory();
+		long freeMemory = runtime.freeMemory();
+		double CPULoad = 0;
+		try {
+			CPULoad = getProcessCpuLoad();
+		} catch (MalformedObjectNameException | InstanceNotFoundException | ReflectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		timePassed += System.currentTimeMillis() - lastTime; // Record FPS
 		lastTime = System.currentTimeMillis();
 		FPS = FPS + 1;
@@ -53,12 +72,11 @@ public class DisplayPanel extends JPanel {
 			fullFPS = FPS;
 			FPS = 0;
 			timePassed = 0.0;
+			FPSs.add(fullFPS);
+			MemoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
+			this.CPULoad.add(CPULoad);
 		}
 		g2.setColor(Color.YELLOW); // Draw FPS
-		Runtime runtime = Runtime.getRuntime();
-		long maxMemory = runtime.maxMemory();
-		long allocatedMemory = runtime.totalMemory();
-		long freeMemory = runtime.freeMemory();
 		stringsToDraw[0] = "FPS: " + Integer.toString(fullFPS);
 		stringsToDraw[1] = ("Free Memory: " +  (freeMemory / 1024 / 256));
 		stringsToDraw[2] = ("Allocated Memory: " + (allocatedMemory / 1024 / 256));
@@ -69,25 +87,14 @@ public class DisplayPanel extends JPanel {
 		stringsToDraw[7] = "OS Version: " + System.getProperty("os.version");
 		stringsToDraw[8] = "OS Architecture: " + System.getProperty("os.arch");
 		stringsToDraw[9] = "0%";
-		try {
-			stringsToDraw[9] = "CPU Usage: " + getProcessCpuLoad();
-		} catch (MalformedObjectNameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ReflectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		stringsToDraw[9] = "CPU Usage: " + CPULoad;
 		for (int i = 0; i < stringsToDraw.length; i++) {
 			g2.drawString(stringsToDraw[i], 5, textGap * (i + 1));
 		}
 	}
 
 	void displayScene(Graphics2D g2) {
-		g2.setColor(background); // Sets the background color
+		g2.setColor(Color.BLACK); // Sets the background color
 		g2.fillRect(0, 0, this.getWidth(), this.getHeight()); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
@@ -108,6 +115,21 @@ public class DisplayPanel extends JPanel {
 		} catch (NullPointerException ex) {
 			// ex.printStackTrace();
 		}
+	}
+	
+	public void saveVARs() {
+		FileWriter write = null;
+		try {
+			write = new FileWriter(System.currentTimeMillis() + ".txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PrintWriter print = new PrintWriter(write);
+		for(int i = 0; i < CPULoad.size(); i++) {
+			print.println("CPU Load " + i + ": " + CPULoad.get(i));
+		}
+		print.close();		
 	}
 	
 	public void pauseGame() {
