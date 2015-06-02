@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.FileFilter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +30,7 @@ public class DisplayPanel extends JPanel {
 	double lastTime = System.currentTimeMillis();
 	int myID;
 	public boolean showDebugInfo = true;
-	SettingsScreen settings;
+	public SettingsScreen settings;
 	ArrayList<Double> CPULoad = new ArrayList<Double>();
 	ArrayList<Double> memoryLoad = new ArrayList<Double>();
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();

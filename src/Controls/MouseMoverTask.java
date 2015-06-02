@@ -15,6 +15,7 @@ public class MouseMoverTask extends Task {
 	Robot mouseMover;
 	boolean toMoveOrCalculate = false; // True is move, false is calculate
 									   //The stages of this task, one centers one calculates angle moved
+	public double sensitivity = 2;
 	int myID;
 	
 	public MouseMoverTask(int ID) {
@@ -31,6 +32,7 @@ public class MouseMoverTask extends Task {
 	public void runTask() { // The default task object
 		if (!Main.displays.get(myID).paused) {
 			if (toMoveOrCalculate) {
+				sensitivity = 11 - Main.displays.get(myID).display.settings.sensitivitySlider.getValue();
 				mouseMover.mouseMove((int)(Main.screenWidth / 2),
 						(int)(Main.screenHeight / 2)); //Center mouse
 				Main.displays.get(myID).setBounds((Main.screenWidth - Main.displays.get(myID).getWidth()) / 2, (Main.screenHeight - Main.displays.get(myID).getHeight() - Main.displays.get(myID).screenOffset) / 2,
@@ -40,9 +42,9 @@ public class MouseMoverTask extends Task {
 				Point point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
 				currentX = (int) point.getX();
 				currentY = (int) point.getY();
-				double xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / Main.displays.get(myID).sensitivity
+				double xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / sensitivity
 						* (currentX - Main.screenWidth / 2); //Calculate xAngle moved
-				double yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / Main.displays.get(myID).sensitivity
+				double yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / sensitivity
 						* (currentY - Main.screenHeight / 2);//Calculate yAngle moved
 				Main.displays.get(myID).currentScene.xAngle = xAngle;
 				Main.displays.get(myID).currentScene.yAngle = yAngle;
@@ -65,7 +67,7 @@ public class MouseMoverTask extends Task {
 
 	@Override
 	public int getWait() {
-		return 7;
+		return 5;
 	}
 
 	@Override

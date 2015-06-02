@@ -16,6 +16,8 @@ public class Main { // The class the begins the engine
 	public static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	public static ArrayList<Display> displays = new ArrayList<Display>();
+	public static int sensitivityLower = 1;
+	public static int sensitivityUpper = 10;
 
 	public static void main(String[] args) { // The main method, starts the engine
 		createDisplay();

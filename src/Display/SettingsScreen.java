@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import main.Main;
@@ -16,6 +18,7 @@ public class SettingsScreen extends JPanel {
 	JButton saveDebugInfo;
 	JButton showOrHideDebug;
 	JButton updateFPSButton;
+	public JSlider sensitivitySlider;
 	JTextField updateFPS;
 	PauseKeyControls keys;
 	int myID;
@@ -28,6 +31,7 @@ public class SettingsScreen extends JPanel {
 		keys = new PauseKeyControls(myID);
 		initDebugButtons();
 		initFPSControls();
+		initSliders();
 	}
 
 	@Override
@@ -63,6 +67,27 @@ public class SettingsScreen extends JPanel {
 		updateFPSButton.addKeyListener(keys);
 		updateFPSButton.addActionListener(new FPSLimitListener());
 		add(updateFPSButton);
+	}
+	
+	private void initSliders() {
+		sensitivitySlider = new JSlider();
+		sensitivitySlider.setMaximum(Main.sensitivityUpper);
+		sensitivitySlider.setMinimum(Main.sensitivityLower);
+		sensitivitySlider.setValue((int) Main.displays.get(myID).mover.sensitivity);
+		sensitivitySlider.setToolTipText("Sensitivity Slider");
+		sensitivitySlider.setMajorTickSpacing(2);
+		sensitivitySlider.setMinorTickSpacing(1);
+		sensitivitySlider.setPaintTicks(true);
+		sensitivitySlider.setPaintLabels(true);
+		sensitivitySlider.setOrientation(JSlider.HORIZONTAL);
+		sensitivitySlider.addKeyListener(keys);
+		sensitivitySlider.setBounds(50, 100, 100, 50);
+		sensitivitySlider.setVisible(true);
+		add(sensitivitySlider);
+		JLabel myLabel = new JLabel();
+		myLabel.setBounds(50, 55, 130, 50);
+		myLabel.setText("Change Sensitivity");
+		add(myLabel);
 	}
 
 	private class DebugButtonListener implements ActionListener {

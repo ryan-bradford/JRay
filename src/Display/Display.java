@@ -28,7 +28,6 @@ public class Display extends JFrame { // Just a holder for a JPanel
 							// Also translates movement to angle movement
 	public Scene currentScene;
 	public double FOV = 1.13446401379; // A nice number which looks good
-	public double sensitivity = 2; // The sensitivity of the mouse, range of 1 to 10
 	public int myID;
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
 	public int screenOffset = 0;

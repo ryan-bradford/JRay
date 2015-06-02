@@ -65,19 +65,6 @@ public class MainKeyControls implements KeyListener {
 			}
 		}
 		
-		if(key == KeyEvent.VK_RIGHT) {//Increase sensitivity
-			if(Main.displays.get(myID).sensitivity < 10) {
-				Main.displays.get(myID).sensitivity++;
-			}
-		}
-		
-		if(key == KeyEvent.VK_LEFT) {//Decrease sensivity
-			if(Main.displays.get(myID).sensitivity > 1) {
-				Main.displays.get(myID).sensitivity--;
-			}
-		}
-		
-		
 	}
 
 	@Override
