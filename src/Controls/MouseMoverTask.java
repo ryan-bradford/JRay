@@ -15,7 +15,7 @@ public class MouseMoverTask extends Task {
 	Robot mouseMover;
 	boolean toMoveOrCalculate = false; // True is move, false is calculate
 									   //The stages of this task, one centers one calculates angle moved
-	public double sensitivity = 2;
+	public double sensitivity = 5;
 	int myID;
 	
 	public MouseMoverTask(int ID) {

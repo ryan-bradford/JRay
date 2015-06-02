@@ -3,6 +3,7 @@ package Display;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ public class SettingsScreen extends JPanel {
 	JButton showOrHideDebug;
 	JButton updateFPSButton;
 	public JSlider sensitivitySlider;
+	public JSlider FOVSlider;
 	JTextField updateFPS;
 	PauseKeyControls keys;
 	int myID;
@@ -70,6 +72,34 @@ public class SettingsScreen extends JPanel {
 	}
 	
 	private void initSliders() {
+		initSensivitySlider();
+		initFOVSlider();
+	}
+	
+	private void initFOVSlider() {
+		FOVSlider = new JSlider();
+		FOVSlider.setMaximum(10);
+		FOVSlider.setMinimum(0);
+		FOVSlider.setValue(1);
+		FOVSlider.setToolTipText("Sensitivity Slider");
+		FOVSlider.setMajorTickSpacing(2);
+		Hashtable labelTable = new Hashtable();
+		labelTable.put( 10, new JLabel("Quake Pro!") );
+		labelTable.put( 0, new JLabel("Pretty Much Blind") );
+		FOVSlider.setPaintLabels(true);
+		FOVSlider.setLabelTable( labelTable );
+		FOVSlider.setOrientation(JSlider.VERTICAL);
+		FOVSlider.addKeyListener(keys);
+		FOVSlider.setBounds(100, 200, 120, 200);
+		FOVSlider.setVisible(true);
+		add(FOVSlider);
+		JLabel myLabel = new JLabel();
+		myLabel.setBounds(10, 255, 130, 50);
+		myLabel.setText("Change FOV");
+		add(myLabel);
+	}
+	
+	private void initSensivitySlider() {
 		sensitivitySlider = new JSlider();
 		sensitivitySlider.setMaximum(Main.sensitivityUpper);
 		sensitivitySlider.setMinimum(Main.sensitivityLower);
