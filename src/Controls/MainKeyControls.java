@@ -51,20 +51,7 @@ public class MainKeyControls implements KeyListener {
 				Main.displays.get(myID).paused = true;
 				Main.displays.get(myID).display.pauseGame();
 			}
-		}
-		
-		if(key == KeyEvent.VK_UP) { //Increase FOV
-			if(Main.displays.get(myID).FOV < Math.PI * 4 / 3) {
-				Main.displays.get(myID).FOV += Math.PI / 12;
-			}
-		}
-		
-		if(key == KeyEvent.VK_DOWN) {//Decrease FOV
-			if(Main.displays.get(myID).FOV > Math.PI / 3) {
-				Main.displays.get(myID).FOV -= Math.PI / 12;
-			}
-		}
-		
+		}	
 	}
 
 	@Override

@@ -146,6 +146,8 @@ public class DisplayPanel extends JPanel {
 	}
 	
 	public void startEngine() {
+		Main.displays.get(myID).mover.sensitivity = 11 - Main.displays.get(myID).display.settings.sensitivitySlider.getValue();
+		Main.displays.get(myID).FOV = Math.PI / 3 + Math.PI * Main.displays.get(myID).display.settings.FOVSlider.getValue() / 10;
 		Main.displays.get(myID).updateKeyControls();
 		Main.displays.get(myID).paused = false;
 		Main.displays.get(myID).hideCursor(true);
