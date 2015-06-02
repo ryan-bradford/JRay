@@ -43,6 +43,11 @@ public class SettingsScreen extends JPanel {
 		height = 40;
 		showOrHideDebug.setBounds((Main.displays.get(myID).getWidth() - width) / 2, Main.displays.get(myID).getHeight() / 12, width, height);
 		add(showOrHideDebug);
+		saveDebugInfo = new JButton("Output a Debug File");
+		saveDebugInfo.addActionListener(new SaveButtonListener());
+		saveDebugInfo.addKeyListener(keys);
+		saveDebugInfo.setBounds((Main.displays.get(myID).getWidth() - width) / 2 + (int)(width * 1.5), Main.displays.get(myID).getHeight() / 12, width, height);
+		add(saveDebugInfo);
 	}
 	
 	private void initFPSControls() {
@@ -71,12 +76,18 @@ public class SettingsScreen extends JPanel {
 			}
 		}
 	}
+	
+	private class SaveButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			Main.displays.get(myID).display.saveVARs();			
+		}
+	}
 
 	private class FPSLimitListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			String fpsText = updateFPS.getText();
-			Main.displays.get(myID).display.saveVARs();
 			int numStart = 0;
 			for (int i = 0; i < fpsText.length(); i++) {
 				if (fpsText.charAt(i) == '1' || fpsText.charAt(i) == '2' || fpsText.charAt(i) == '3' || fpsText.charAt(i) == '4' || fpsText.charAt(i) == '5' || fpsText.charAt(i) == '6'

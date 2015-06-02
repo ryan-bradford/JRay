@@ -33,7 +33,7 @@ public class DisplayPanel extends JPanel {
 	public boolean showDebugInfo = true;
 	SettingsScreen settings;
 	ArrayList<Double> CPULoad = new ArrayList<Double>();
-	ArrayList<Double> MemoryLoad = new ArrayList<Double>();
+	ArrayList<Double> memoryLoad = new ArrayList<Double>();
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();
 	
 	
@@ -73,7 +73,7 @@ public class DisplayPanel extends JPanel {
 			FPS = 0;
 			timePassed = 0.0;
 			FPSs.add(fullFPS);
-			MemoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
+			memoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
 			this.CPULoad.add(CPULoad);
 		}
 		g2.setColor(Color.YELLOW); // Draw FPS
@@ -128,6 +128,8 @@ public class DisplayPanel extends JPanel {
 		PrintWriter print = new PrintWriter(write);
 		for(int i = 0; i < CPULoad.size(); i++) {
 			print.println("CPU Load " + i + ": " + CPULoad.get(i));
+			print.println("Memory Load " + i + ": " + memoryLoad.get(i));
+			print.println("FPS " + i + ": " + FPSs.get(i));
 		}
 		print.close();		
 	}
