@@ -1,5 +1,6 @@
 package Display;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import main.Main;
 import Controls.PauseKeyControls;
@@ -19,9 +21,10 @@ public class SettingsScreen extends JPanel {
 	JButton saveDebugInfo;
 	JButton showOrHideDebug;
 	JButton updateFPSButton;
-	public JSlider sensitivitySlider;
-	public JSlider FOVSlider;
+	JSlider sensitivitySlider;
+	JSlider FOVSlider;
 	JTextField updateFPS;
+	JTextPane title;
 	PauseKeyControls keys;
 	int myID;
 	int width = 150;
@@ -34,11 +37,24 @@ public class SettingsScreen extends JPanel {
 		initDebugButtons();
 		initFPSControls();
 		initSliders();
+		initTitle();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		this.addKeyListener(keys);
+		super.paintComponent(g);
+	}
+	
+	private void initTitle() {
+		title = new JTextPane();
+		title.setEditable(false);
+		//title.setOpaque(false);
+		title.setText("Settings");
+		title.setBounds((Main.displays.get(myID).getWidth() - 120) / 2, 50, 120, 50);
+		title.setFont(new Font("TimesRoman", Font.BOLD, 30));
+		title.addKeyListener(keys);
+		add(title);
 	}
 	
 	private void initDebugButtons() {
