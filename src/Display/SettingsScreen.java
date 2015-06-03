@@ -47,12 +47,12 @@ public class SettingsScreen extends JPanel {
 		showOrHideDebug.addKeyListener(keys);
 		width = 150;
 		height = 40;
-		showOrHideDebug.setBounds((Main.displays.get(myID).getWidth() - width) / 2, Main.displays.get(myID).getHeight() / 12, width, height);
+		showOrHideDebug.setBounds(50, Main.displays.get(myID).getHeight() / 12, width, height);
 		add(showOrHideDebug);
 		saveDebugInfo = new JButton("Output a Debug File");
 		saveDebugInfo.addActionListener(new SaveButtonListener());
 		saveDebugInfo.addKeyListener(keys);
-		saveDebugInfo.setBounds((Main.displays.get(myID).getWidth() - width) / 2 + (int)(width * 1.5), Main.displays.get(myID).getHeight() / 12, width, height);
+		saveDebugInfo.setBounds(50, 4 * Main.displays.get(myID).getHeight() / 12, width, height);
 		add(saveDebugInfo);
 	}
 	
@@ -60,12 +60,12 @@ public class SettingsScreen extends JPanel {
 		updateFPS = new JTextField("Enter Your FPS Limit: ");
 		width = 150;
 		height = 20;
-		updateFPS.setBounds((Main.displays.get(myID).getWidth() - width) / 2, (int) (2.5 * Main.displays.get(myID).getHeight() / 12), width, height);
+		updateFPS.setBounds(50, (int) (2.5 * Main.displays.get(myID).getHeight() / 12), width, height);
 		updateFPS.addKeyListener(keys);
 		add(updateFPS);
 		updateFPSButton = new JButton("Press To Update Your FPS Limit");
 		width = 220;
-		updateFPSButton.setBounds((Main.displays.get(myID).getWidth() - width) / 2, 3 * Main.displays.get(myID).getHeight() / 12, width, height);
+		updateFPSButton.setBounds(50, 3 * Main.displays.get(myID).getHeight() / 12, width, height);
 		updateFPSButton.addKeyListener(keys);
 		updateFPSButton.addActionListener(new FPSLimitListener());
 		add(updateFPSButton);
@@ -90,11 +90,11 @@ public class SettingsScreen extends JPanel {
 		FOVSlider.setLabelTable( labelTable );
 		FOVSlider.setOrientation(JSlider.VERTICAL);
 		FOVSlider.addKeyListener(keys);
-		FOVSlider.setBounds(100, 200, 120, 200);
+		FOVSlider.setBounds(50, (int)(6.5 * Main.displays.get(myID).getHeight() / 12), 120, 200);
 		FOVSlider.setVisible(true);
 		add(FOVSlider);
 		JLabel myLabel = new JLabel();
-		myLabel.setBounds(10, 255, 130, 50);
+		myLabel.setBounds(200, (int)(7.5 * Main.displays.get(myID).getHeight() / 12), 130, 50);
 		myLabel.setText("Change FOV");
 		add(myLabel);
 	}
@@ -111,11 +111,11 @@ public class SettingsScreen extends JPanel {
 		sensitivitySlider.setPaintLabels(true);
 		sensitivitySlider.setOrientation(JSlider.HORIZONTAL);
 		sensitivitySlider.addKeyListener(keys);
-		sensitivitySlider.setBounds(50, 100, 100, 50);
+		sensitivitySlider.setBounds(50, 5 * Main.displays.get(myID).getHeight() / 12, 100, 50);
 		sensitivitySlider.setVisible(true);
 		add(sensitivitySlider);
 		JLabel myLabel = new JLabel();
-		myLabel.setBounds(50, 55, 130, 50);
+		myLabel.setBounds(50, (int)(5.5 * Main.displays.get(myID).getHeight() / 12), 130, 50);
 		myLabel.setText("Change Sensitivity");
 		add(myLabel);
 	}
