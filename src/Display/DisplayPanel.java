@@ -34,6 +34,7 @@ public class DisplayPanel extends JPanel {
 	ArrayList<Double> CPULoad = new ArrayList<Double>();
 	ArrayList<Double> memoryLoad = new ArrayList<Double>();
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();
+	double startTime = System.currentTimeMillis();
 	
 	
 	public DisplayPanel(int ID) {
@@ -94,7 +95,7 @@ public class DisplayPanel extends JPanel {
 
 	void displayScene(Graphics2D g2) {
 		g2.setColor(Color.BLACK); // Sets the background color
-		g2.fillRect(0, 0, this.getWidth(), this.getHeight()); // Draws the background
+		g2.fillRect(0, 0, Main.screenWidth, Main.screenHeight); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
 			for (int i = 0; i < Main.displays.get(myID).currentScene.current.size(); i++) {
@@ -125,10 +126,18 @@ public class DisplayPanel extends JPanel {
 			e.printStackTrace();
 		}
 		PrintWriter print = new PrintWriter(write);
+		print.println((System.currentTimeMillis() - startTime) / 1000 + " Session length in Seconds");
+		print.println("CPU Load");
 		for(int i = 0; i < CPULoad.size(); i++) {
-			print.println("CPU Load " + i + ": " + CPULoad.get(i));
-			print.println("Memory Load " + i + ": " + memoryLoad.get(i));
-			print.println("FPS " + i + ": " + FPSs.get(i));
+			print.println(CPULoad.get(i));
+		}
+		print.println("Memory Load");
+		for(int i = 0; i < CPULoad.size(); i++) {
+			print.println(memoryLoad.get(i));
+		}
+		print.println("FPS");
+		for(int i = 0; i < CPULoad.size(); i++) {
+			print.println(FPSs.get(i));
 		}
 		print.close();		
 	}
