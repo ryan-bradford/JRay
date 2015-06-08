@@ -13,23 +13,15 @@ public class Polygon3D {
 	public Image image;
 	public ColoredPolygon myPoly; 
 	int myID;
+	int[] xs;
+	int[] ys;
+	Line[] myLines;
 	
 	public Polygon3D(Point3D[] toAdd, Color toColor, Image image, int ID) { //The 3D Polygon Object
 		myColor = toColor;
 		myPoints = toAdd;
 		this.image = image;
 		myID = ID;
-	}
-	
-	public void updateDistance() { //Gets the farthest points distance from the camera
-		int maxID = 0;			   //Used to order how the ColoredPolygons are drawn
-		Line[] current = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation);
-		for(int i = 1; i < current.length; i++) {
-			if(current[i].length < current[maxID].length) {
-				maxID = i;
-			}
-		}
-		distanceFromCamera = current[maxID].length;
 	}
 	
 	public Line[] getLinesToPoint(Point3D toPathTo) { //Makes an array of lines	
@@ -41,12 +33,12 @@ public class Polygon3D {
 	}
 	
 	public void rasterizeToScreen() { //Rasterizes the polygon
-		int[] xs = new int[myPoints.length];
-		int[] ys = new int[myPoints.length];
-		Line[] lines = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation); //Gets the lines to the camera
-		for(int i = 0; i < lines.length; i++) {
-			xs[i] = Main.displays.get(myID).find.getWidthPixel(lines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
-			ys[i] = Main.displays.get(myID).find.getHeightPixel(lines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
+		xs = new int[myPoints.length];
+		ys = new int[myPoints.length];
+		myLines = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation); //Gets the lines to the camera
+		for(int i = 0; i < myLines.length; i++) {
+			xs[i] = Main.displays.get(myID).find.getWidthPixel(myLines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
+			ys[i] = Main.displays.get(myID).find.getHeightPixel(myLines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys, image);
 	}

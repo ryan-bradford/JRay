@@ -7,6 +7,9 @@ public class Line {
 	double yRadians;
 	public Point3D start;
 	public Point3D end;
+	double opposite;
+	double adjcent;
+	double tanValue;
 
 	/*
 	 * X Distance = cos(yRadians) * distancePerItteration Y Distance =
@@ -22,9 +25,9 @@ public class Line {
 	}
 	
 	public double getVertAngle() { //Gets the vertical angle of the line (up down angle)
-		double opposite = (end.zPos - start.zPos);
-		double adjcent = Math.sqrt(Math.pow(Math.abs(end.yPos - start.yPos), 2) + Math.pow(Math.abs(end.xPos - start.xPos), 2));	
-		double tanValue = Math.atan(Math.abs(opposite) / (adjcent));//Expands upon the java trig functions
+		opposite = (end.zPos - start.zPos);
+		adjcent = Math.sqrt(Math.pow(Math.abs(end.yPos - start.yPos), 2) + Math.pow(Math.abs(end.xPos - start.xPos), 2));	
+		tanValue = Math.atan(Math.abs(opposite) / (adjcent));//Expands upon the java trig functions
 		if(opposite < 0) {
 			return Math.PI * 2 - tanValue;
 		}
@@ -32,9 +35,9 @@ public class Line {
 	}
 	
 	public double getHorAngle() { //Gets the horizontal angle of the line (left right angle)
-		double opposite = (end.xPos - start.xPos);
-		double adjcent = (end.yPos - start.yPos);	
-		double tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));//Expands upon the java trig functions
+		opposite = (end.xPos - start.xPos);
+		adjcent = (end.yPos - start.yPos);	
+		tanValue = Math.atan(Math.abs(opposite) / Math.abs(adjcent));//Expands upon the java trig functions
 		if(opposite < 0 && adjcent < 0) {									//Allows for more accurate
 			return Math.PI + tanValue;
 		}

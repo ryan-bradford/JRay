@@ -1,6 +1,9 @@
 package Thread;
 
 public class Task {
+	
+	int numShortWaitsPassed = 0;
+	
 	public void runTask() { //The default task object
 		
 	}

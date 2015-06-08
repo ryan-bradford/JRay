@@ -15,8 +15,11 @@ public class MouseMoverTask extends Task {
 	Robot mouseMover;
 	boolean toMoveOrCalculate = false; // True is move, false is calculate
 									   //The stages of this task, one centers one calculates angle moved
+	Point point;
 	public double sensitivity = 5;
 	int myID;
+	double xAngle;
+	double yAngle;
 	
 	public MouseMoverTask(int ID) {
 		myID = ID;
@@ -38,12 +41,12 @@ public class MouseMoverTask extends Task {
 						Main.displays.get(myID).getBounds().width, Main.displays.get(myID).getBounds().height); //Center and resize window
 				toMoveOrCalculate = false; //Go to the other stage
 			} else {
-				Point point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
+				point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
 				currentX = (int) point.getX();
 				currentY = (int) point.getY();
-				double xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / sensitivity
+				xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / sensitivity
 						* (currentX - Main.screenWidth / 2); //Calculate xAngle moved
-				double yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / sensitivity
+				yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / sensitivity
 						* (currentY - Main.screenHeight / 2);//Calculate yAngle moved
 				Main.displays.get(myID).currentScene.xAngle = xAngle;
 				Main.displays.get(myID).currentScene.yAngle = yAngle;
