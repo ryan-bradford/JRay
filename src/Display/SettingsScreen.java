@@ -167,7 +167,7 @@ public class SettingsScreen extends JPanel {
 					break;
 				}
 			}
-			int fps = Integer.parseInt(fpsText.substring(numStart, fpsText.length()));
+			int fps = Integer.parseInt(fpsText.substring(numStart, fpsText.length()).trim());
 			Main.displays.get(myID).displayWait = 1000 / fps - 1;
 		}
 	}

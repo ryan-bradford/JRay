@@ -35,8 +35,13 @@ public class DisplayPanel extends JPanel {
 	ArrayList<Double> memoryLoad = new ArrayList<Double>();
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();
 	double startTime = System.currentTimeMillis();
-	
-	
+	long maxMemory = Runtime.getRuntime().maxMemory();
+	Runtime runtime;
+	String[] stringsToDraw;
+	long allocatedMemory;
+	long freeMemory;
+	double CPULoad1;
+
 	public DisplayPanel(int ID) {
 		myID = ID;
 		this.setLayout(null);
@@ -47,20 +52,19 @@ public class DisplayPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) (g);
 		super.paintComponent(g2);
 		displayScene(g2);
-		if(showDebugInfo) {
+		if (showDebugInfo) {
 			displaySystemInfo(g2);
 		}
 	}
 
 	void displaySystemInfo(Graphics2D g2) {
-		String[] stringsToDraw = new String[10];
-		Runtime runtime = Runtime.getRuntime();
-		long maxMemory = runtime.maxMemory();
-		long allocatedMemory = runtime.totalMemory();
-		long freeMemory = runtime.freeMemory();
-		double CPULoad = 0;
+		stringsToDraw = new String[10];
+		runtime = Runtime.getRuntime();
+		allocatedMemory = runtime.totalMemory();
+		freeMemory = runtime.freeMemory();
+		CPULoad1 = 0;
 		try {
-			CPULoad = getProcessCpuLoad();
+			CPULoad1 = getProcessCpuLoad();
 		} catch (MalformedObjectNameException | InstanceNotFoundException | ReflectionException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -74,20 +78,20 @@ public class DisplayPanel extends JPanel {
 			timePassed = 0.0;
 			FPSs.add(fullFPS);
 			memoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
-			this.CPULoad.add(CPULoad);
+			this.CPULoad.add(CPULoad1);
 		}
 		g2.setColor(Color.YELLOW); // Draw FPS
 		stringsToDraw[0] = "FPS: " + Integer.toString(fullFPS);
-		stringsToDraw[1] = ("Free Memory: " +  (freeMemory / 1024 / 256));
+		stringsToDraw[1] = ("Free Memory: " + (freeMemory / 1024 / 256));
 		stringsToDraw[2] = ("Allocated Memory: " + (allocatedMemory / 1024 / 256));
-		stringsToDraw[3] = ("Used Memory: " +  ((allocatedMemory - freeMemory) / 1024 / 256));
-		stringsToDraw[4] = ("Max Memory: " +  (maxMemory / 1024 / 256));
-		stringsToDraw[5] = ("Total Free Memory: " +  ((freeMemory + (maxMemory - allocatedMemory)) / 1024 / 256));
+		stringsToDraw[3] = ("Used Memory: " + ((allocatedMemory - freeMemory) / 1024 / 256));
+		stringsToDraw[4] = ("Max Memory: " + (maxMemory / 1024 / 256));
+		stringsToDraw[5] = ("Total Free Memory: " + ((freeMemory + (maxMemory - allocatedMemory)) / 1024 / 256));
 		stringsToDraw[6] = "OS: " + System.getProperty("os.name");
 		stringsToDraw[7] = "OS Version: " + System.getProperty("os.version");
 		stringsToDraw[8] = "OS Architecture: " + System.getProperty("os.arch");
 		stringsToDraw[9] = "0%";
-		stringsToDraw[9] = "CPU Usage: " + CPULoad;
+		stringsToDraw[9] = "CPU Usage: " + CPULoad1;
 		for (int i = 0; i < stringsToDraw.length; i++) {
 			g2.drawString(stringsToDraw[i], 5, textGap * (i + 1));
 		}
@@ -99,24 +103,14 @@ public class DisplayPanel extends JPanel {
 		g2.setStroke(new BasicStroke(10));
 		try {
 			for (int i = 0; i < Main.displays.get(myID).currentScene.current.size(); i++) {
-				try {
-					g2.setColor(Main.displays.get(myID).currentScene.current.get(i).myPoly.myColor);
-					g2.fillPolygon(Main.displays.get(myID).currentScene.current.get(i).myPoly);// Draws the rasterized polygon
-					if (Main.displays.get(myID).currentScene.current.get(i).myPoly.img != null) {
-						g2.drawImage(Main.displays.get(myID).currentScene.current.get(i).myPoly.img, (int) (Main.displays.get(myID).currentScene.current.get(i).myPoly.minX),
-								(int) (Main.displays.get(myID).currentScene.current.get(i).myPoly.minY), null);// Draws its image (if needed)
-					}
-				} catch (NullPointerException ex) {
-					// ex.printStackTrace();
-				} catch(IndexOutOfBoundsException ex) {
-					
-				}
+				g2.setColor(Main.displays.get(myID).currentScene.current.get(i).myPoly.myColor);
+				g2.fillPolygon(Main.displays.get(myID).currentScene.current.get(i).myPoly);// Draws the rasterized polygon
 			}
 		} catch (NullPointerException ex) {
 			// ex.printStackTrace();
 		}
 	}
-	
+
 	public void saveVARs() {
 		FileWriter write = null;
 		try {
@@ -128,20 +122,20 @@ public class DisplayPanel extends JPanel {
 		PrintWriter print = new PrintWriter(write);
 		print.println((System.currentTimeMillis() - startTime) / 1000 + " Session length in Seconds");
 		print.println("CPU Load");
-		for(int i = 0; i < CPULoad.size(); i++) {
+		for (int i = 0; i < CPULoad.size(); i++) {
 			print.println(CPULoad.get(i));
 		}
 		print.println("Memory Load");
-		for(int i = 0; i < CPULoad.size(); i++) {
+		for (int i = 0; i < CPULoad.size(); i++) {
 			print.println(memoryLoad.get(i));
 		}
 		print.println("FPS");
-		for(int i = 0; i < CPULoad.size(); i++) {
+		for (int i = 0; i < CPULoad.size(); i++) {
 			print.println(FPSs.get(i));
 		}
-		print.close();		
+		print.close();
 	}
-	
+
 	public void pauseGame() {
 		Main.displays.get(myID).paused = true;
 		Main.displays.get(myID).hideCursor(false);
@@ -153,7 +147,7 @@ public class DisplayPanel extends JPanel {
 		settings.repaint();
 		Main.displays.get(myID).repaint();
 	}
-	
+
 	public void startEngine() {
 		Main.displays.get(myID).mover.sensitivity = 11 - Main.displays.get(myID).display.settings.sensitivitySlider.getValue();
 		Main.displays.get(myID).FOV = Math.PI / 3 + Math.PI * Main.displays.get(myID).display.settings.FOVSlider.getValue() / 10;
@@ -166,7 +160,7 @@ public class DisplayPanel extends JPanel {
 		Main.displays.get(myID).requestFocus();
 		Main.displays.get(myID).repaint();
 	}
-	
+
 	public void loadSettings() {
 		settings = new SettingsScreen(myID);
 		settings.setBounds(0, 0, Main.displays.get(myID).getWidth(), Main.displays.get(myID).getHeight());
@@ -175,19 +169,21 @@ public class DisplayPanel extends JPanel {
 		settings.repaint();
 		add(settings);
 	}
-	
+
 	public double getProcessCpuLoad() throws MalformedObjectNameException, ReflectionException, InstanceNotFoundException {
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-	    ObjectName name    = ObjectName.getInstance("java.lang:type=OperatingSystem");
-	    AttributeList list = mbs.getAttributes(name, new String[]{ "ProcessCpuLoad" });
+		ObjectName name = ObjectName.getInstance("java.lang:type=OperatingSystem");
+		AttributeList list = mbs.getAttributes(name, new String[]{"ProcessCpuLoad"});
 
-	    if (list.isEmpty())     return Double.NaN;
+		if (list.isEmpty())
+			return Double.NaN;
 
-	    Attribute att = (Attribute)list.get(0);
-	    Double value  = (Double)att.getValue();
+		Attribute att = (Attribute) list.get(0);
+		Double value = (Double) att.getValue();
 
-	    if (value == -1.0)      return Double.NaN;  // usually takes a couple of seconds before we get real values
+		if (value == -1.0)
+			return Double.NaN; // usually takes a couple of seconds before we get real values
 
-	    return ((int)(value * 1000) / 10.0);        // returns a percentage value with 1 decimal point precision
+		return ((int) (value * 1000) / 10.0); // returns a percentage value with 1 decimal point precision
 	}
 }
