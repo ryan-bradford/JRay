@@ -22,11 +22,11 @@ public class Scene {
 		myID = ID;
 		current = new ArrayList<Polygon3D>();
 		factory = new ShapeFactory(myID);
-		for (int i = 0; i < 4; i++) {
-			//addArray(factory.generateSquare(i * 100, 200, 0, 50));
+		for (int i = 0; i < 40; i++) {
+			addArray(factory.generateCube(i * 100, 200, 0, 50, new Color(255, 0, 0)));
 			//addArray(factory.generateImage(i * 100, 200, 0, 50, "download.jpg"));
 		}
-		addArray(factory.generateSquare(-100, 1000, 0, 100, new Color(255, 0, 0)));
+		//addArray(factory.generateCube(-100, 1000, 0, 100, new Color(255, 0, 0)));
 	}
 	
 

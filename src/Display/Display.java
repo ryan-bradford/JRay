@@ -74,7 +74,8 @@ public class Display extends JFrame { // Just a holder for a JPanel
 
 	public void startEngine() { // Starts the rasterizers and updater
 		update = new UpdateTask(myID);
-		double cores = Runtime.getRuntime().availableProcessors() - 1;
+		//double cores = Runtime.getRuntime().availableProcessors();
+		double cores = 1;
 		rasterizers = new RasterizeTask[(int) cores];
 		myManage.addTask(update);
 		for (int i = 0; i < cores; i++) {

@@ -36,11 +36,6 @@ public class DisplayPanel extends JPanel {
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();
 	double startTime = System.currentTimeMillis();
 	long maxMemory = Runtime.getRuntime().maxMemory();
-	Runtime runtime;
-	String[] stringsToDraw;
-	long allocatedMemory;
-	long freeMemory;
-	double CPULoad1;
 
 	public DisplayPanel(int ID) {
 		myID = ID;
@@ -58,11 +53,11 @@ public class DisplayPanel extends JPanel {
 	}
 
 	void displaySystemInfo(Graphics2D g2) {
-		stringsToDraw = new String[10];
-		runtime = Runtime.getRuntime();
-		allocatedMemory = runtime.totalMemory();
-		freeMemory = runtime.freeMemory();
-		CPULoad1 = 0;
+		String[] stringsToDraw = new String[10];
+		Runtime runtime = Runtime.getRuntime();
+		long allocatedMemory = runtime.totalMemory();
+		long freeMemory = runtime.freeMemory();
+		double CPULoad1 = 0;
 		try {
 			CPULoad1 = getProcessCpuLoad();
 		} catch (MalformedObjectNameException | InstanceNotFoundException | ReflectionException e1) {
@@ -108,6 +103,8 @@ public class DisplayPanel extends JPanel {
 			}
 		} catch (NullPointerException ex) {
 			// ex.printStackTrace();
+		} catch(IndexOutOfBoundsException ex) {
+			
 		}
 	}
 
