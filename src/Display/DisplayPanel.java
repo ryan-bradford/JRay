@@ -28,7 +28,7 @@ public class DisplayPanel extends JPanel {
 	int FPS = 0;
 	int fullFPS = 0;
 	double lastTime = System.currentTimeMillis();
-	int myID;
+	
 	public boolean showDebugInfo = true;
 	public SettingsScreen settings;
 	ArrayList<Double> CPULoad = new ArrayList<Double>();
@@ -37,8 +37,7 @@ public class DisplayPanel extends JPanel {
 	double startTime = System.currentTimeMillis();
 	long maxMemory = Runtime.getRuntime().maxMemory();
 
-	public DisplayPanel(int ID) {
-		myID = ID;
+	public DisplayPanel() {
 		this.setLayout(null);
 	}
 
@@ -97,9 +96,9 @@ public class DisplayPanel extends JPanel {
 		g2.fillRect(0, 0, Main.screenWidth, Main.screenHeight); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
-			for (int i = 0; i < Main.displays.get(myID).currentScene.current.size(); i++) {
-				g2.setColor(Main.displays.get(myID).currentScene.current.get(i).myPoly.myColor);
-				g2.fillPolygon(Main.displays.get(myID).currentScene.current.get(i).myPoly);// Draws the rasterized polygon
+			for (int i = 0; i < Main.display.currentScene.toRender.size(); i++) {
+				g2.setColor(Main.display.currentScene.toRender.get(i).myPoly.myColor);
+				g2.fillPolygon(Main.display.currentScene.toRender.get(i).myPoly);// Draws the rasterized polygon
 			}
 		} catch (NullPointerException ex) {
 			// ex.printStackTrace();
@@ -134,33 +133,33 @@ public class DisplayPanel extends JPanel {
 	}
 
 	public void pauseGame() {
-		Main.displays.get(myID).paused = true;
-		Main.displays.get(myID).hideCursor(false);
+		Main.display.paused = true;
+		Main.display.hideCursor(false);
 		this.setFocusable(false);
-		Main.displays.get(myID).setFocusable(false);
+		Main.display.setFocusable(false);
 		settings.setFocusable(true);
 		settings.setVisible(true);
 		settings.requestFocus();
 		settings.repaint();
-		Main.displays.get(myID).repaint();
+		Main.display.repaint();
 	}
 
 	public void startEngine() {
-		Main.displays.get(myID).mover.sensitivity = 11 - Main.displays.get(myID).display.settings.sensitivitySlider.getValue();
-		Main.displays.get(myID).FOV = Math.PI / 3 + Math.PI * Main.displays.get(myID).display.settings.FOVSlider.getValue() / 10;
-		Main.displays.get(myID).updateKeyControls();
-		Main.displays.get(myID).paused = false;
-		Main.displays.get(myID).hideCursor(true);
+		Main.display.mover.sensitivity = 11 - Main.display.display.settings.sensitivitySlider.getValue();
+		Main.display.FOV = Math.PI / 3 + Math.PI * Main.display.display.settings.FOVSlider.getValue() / 10;
+		Main.display.updateKeyControls();
+		Main.display.paused = false;
+		Main.display.hideCursor(true);
 		settings.setVisible(false);
 		settings.setFocusable(false);
-		Main.displays.get(myID).setFocusable(true);
-		Main.displays.get(myID).requestFocus();
-		Main.displays.get(myID).repaint();
+		Main.display.setFocusable(true);
+		Main.display.requestFocus();
+		Main.display.repaint();
 	}
 
 	public void loadSettings() {
-		settings = new SettingsScreen(myID);
-		settings.setBounds(0, 0, Main.displays.get(myID).getWidth(), Main.displays.get(myID).getHeight());
+		settings = new SettingsScreen();
+		settings.setBounds(0, 0, Main.display.getWidth(), Main.display.getHeight());
 		settings.setVisible(false);
 		settings.setFocusable(false);
 		settings.repaint();

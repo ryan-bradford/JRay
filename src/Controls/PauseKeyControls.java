@@ -7,18 +7,18 @@ import main.Main;
 
 public class PauseKeyControls implements KeyListener{
 
-	int myID;
 	
-	public PauseKeyControls(int ID) {
-		myID = ID;
+	
+	public PauseKeyControls() {
+
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_ESCAPE) {
-			Main.displays.get(myID).paused = false;
-			Main.displays.get(myID).display.startEngine();
+			Main.display.paused = false;
+			Main.display.display.startEngine();
 		}
 	}
 

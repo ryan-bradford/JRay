@@ -17,12 +17,11 @@ public class MouseMoverTask extends Task {
 									   //The stages of this task, one centers one calculates angle moved
 	Point point;
 	public double sensitivity = 5;
-	int myID;
+	
 	double xAngle;
 	double yAngle;
 	
-	public MouseMoverTask(int ID) {
-		myID = ID;
+	public MouseMoverTask() {
 		try {
 			mouseMover = new Robot(); //The thing that centers the pointer
 		} catch (AWTException e) {
@@ -33,31 +32,31 @@ public class MouseMoverTask extends Task {
 
 	@Override
 	public void runTask() { // The default task object
-		if (!Main.displays.get(myID).paused) {
+		if (!Main.display.paused) {
 			if (toMoveOrCalculate) {
 				mouseMover.mouseMove((int)(Main.screenWidth / 2),
 						(int)(Main.screenHeight / 2)); //Center mouse
-				Main.displays.get(myID).setBounds((Main.screenWidth - Main.displays.get(myID).getWidth()) / 2, (Main.screenHeight - Main.displays.get(myID).getHeight() - Main.displays.get(myID).screenOffset) / 2,
-						Main.displays.get(myID).getBounds().width, Main.displays.get(myID).getBounds().height); //Center and resize window
+				Main.display.setBounds((Main.screenWidth - Main.display.getWidth()) / 2, (Main.screenHeight - Main.display.getHeight() - Main.display.screenOffset) / 2,
+						Main.display.getBounds().width, Main.display.getBounds().height); //Center and resize window
 				toMoveOrCalculate = false; //Go to the other stage
 			} else {
 				point = MouseInfo.getPointerInfo().getLocation(); //Get mouse location
 				currentX = (int) point.getX();
 				currentY = (int) point.getY();
-				xAngle = Main.displays.get(myID).currentScene.xAngle + (Main.displays.get(myID).FOV / Main.screenWidth) / sensitivity
+				xAngle = Main.display.currentScene.xAngle + (Main.display.FOV / Main.screenWidth) / sensitivity
 						* (currentX - Main.screenWidth / 2); //Calculate xAngle moved
-				yAngle = Main.displays.get(myID).currentScene.yAngle + (Main.displays.get(myID).FOV / Main.screenHeight) / sensitivity
+				yAngle = Main.display.currentScene.yAngle + (Main.display.FOV / Main.screenHeight) / sensitivity
 						* (currentY - Main.screenHeight / 2);//Calculate yAngle moved
-				Main.displays.get(myID).currentScene.xAngle = xAngle;
-				Main.displays.get(myID).currentScene.yAngle = yAngle;
+				Main.display.currentScene.xAngle = xAngle;
+				Main.display.currentScene.yAngle = yAngle;
 				toMoveOrCalculate = true;
 			}
 		}
-		if(!Main.displays.get(myID).isActive() && !Main.displays.get(myID).paused) {//Pauses the game if you move the window to the background
-			Main.displays.get(myID).paused = true;
-			Main.displays.get(myID).display.pauseGame();
-			Main.displays.get(myID).hideCursor(false);
-			Main.displays.get(myID).repaint();
+		if(!Main.display.isActive() && !Main.display.paused) {//Pauses the game if you move the window to the background
+			Main.display.paused = true;
+			Main.display.display.pauseGame();
+			Main.display.hideCursor(false);
+			Main.display.repaint();
 		}
 	}
 

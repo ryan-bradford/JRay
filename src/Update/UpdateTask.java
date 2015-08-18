@@ -1,6 +1,10 @@
 package Update;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import main.Main;
+import Geometry.Polygon3D;
 import Other.OtherFunctions;
 import Thread.Task;
 
@@ -9,22 +13,31 @@ public class UpdateTask extends Task {
 	int orderNum;
 	double percent;
 	boolean doneUpating;
-	int myID;
+	
 	int myWait = 1;
 
-	public UpdateTask(int ID) {
-		myID = ID;
+	public UpdateTask() {
+
 	}
 
 	@Override
 	public void runTask() { // The default task object
 		try {
-			myWait = Main.displays.get(myID).displayWait;
-			if (!Main.displays.get(myID).paused && readyToUpdate()) { // Runs once for every time the rasterizer runs
-				Main.displays.get(myID).repaint(); // Makes the screen call the paintComponent method
-				Main.displays.get(myID).currentScene.current = OtherFunctions.sortList(Main.displays.get(myID).currentScene.current); // Sorts the list
-				for (int i = 0; i < Main.displays.get(myID).rasterizers.length; i++) { // Tells the rasterizers to start
-					Main.displays.get(myID).rasterizers[i].isDone = false;
+			myWait = Main.display.displayWait;
+			if (!Main.display.paused && readyToUpdate()) { // Runs once for every time the rasterizer runs
+				Main.display.repaint(); // Makes the screen call the paintComponent method
+				//Make Polys Update Distance
+				Main.display.currentScene.updateDistances();
+				Main.display.currentScene.toRender = Main.display.currentScene.getCurrent();
+				Collections.sort(Main.display.currentScene.toRender, new Comparator<Polygon3D>() {
+			        @Override
+			        public int compare(Polygon3D  poly1, Polygon3D  poly2)
+			        {
+			            return Double.compare(poly1.distanceFromCamera, poly2.distanceFromCamera);
+			        }
+			    });
+				for (int i = 0; i < Main.display.rasterizers.length; i++) { // Tells the rasterizers to start
+					Main.display.rasterizers[i].isDone = false;
 				}
 			}
 		} catch (IndexOutOfBoundsException ex) {
@@ -33,8 +46,8 @@ public class UpdateTask extends Task {
 	}
 
 	public boolean readyToUpdate() {
-		for (int i = 0; i < Main.displays.get(myID).rasterizers.length; i++) {
-			if (Main.displays.get(myID).rasterizers[i].isDone == false) {
+		for (int i = 0; i < Main.display.rasterizers.length; i++) {
+			if (Main.display.rasterizers[i].isDone == false) {
 				return false;
 			}
 		}

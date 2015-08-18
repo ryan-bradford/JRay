@@ -1,8 +1,8 @@
 package main;
 
 import java.awt.GraphicsEnvironment;
+
 import java.awt.Toolkit;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -15,28 +15,27 @@ public class Main { // The class the begins the engine
 	// Make it so camera position is saved in the scene
 	public static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static ArrayList<Display> displays = new ArrayList<Display>();
+	public static Display display = new Display();
 	public static int sensitivityLower = 1;
 	public static int sensitivityUpper = 10;
 
 	public static void main(String[] args) { // The main method, starts the engine
 		createDisplay();
-		Scene myScene = new Scene(0);
-		displays.get(0).addScene(myScene);
+		Scene myScene = new Scene();
+		display.addScene(myScene);
 	}
 
 	public static void createDisplay() { // Inits and Makes the JFrame visible
-		displays.add(new Display(displays.size()));
-		int thisID = displays.size() - 1;
-		displays.get(thisID).pack();
-		displays.get(thisID).setBounds(0, 0, (int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth()),
+		display = new Display();
+		display.pack();
+		display.setBounds(0, 0, (int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth()),
 				(int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight()));
-		displays.get(thisID).setVisible(true);
-		displays.get(thisID).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		displays.get(thisID).hideCursor(true);
-		displays.get(thisID).screenOffset = (int) ((int) (screenHeight) - GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight());
-		displays.get(thisID).display.loadSettings();
-		displays.get(thisID).setLayout(null);
+		display.setVisible(true);
+		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		display.hideCursor(true);
+		display.screenOffset = (int) ((int) (screenHeight) - GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight());
+		display.display.loadSettings();
+		display.setLayout(null);
 	}
 
 }

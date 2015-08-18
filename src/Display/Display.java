@@ -28,15 +28,13 @@ public class Display extends JFrame { // Just a holder for a JPanel
 							// Also translates movement to angle movement
 	public Scene currentScene;
 	public double FOV = 1.13446401379; // A nice number which looks good
-	public int myID;
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
 	public int screenOffset = 0;
 	public int displayWait = 1; //1000 / FPSLimit - 1 = displayWait
 
-	public Display(int ID) { // Inits the display panel
+	public Display() { // Inits the display panel
 		initTaskManager();
-		myID = ID;
-		display = new DisplayPanel(myID);
+		display = new DisplayPanel();
 		display.setBounds(0, 0, Main.screenWidth, Main.screenHeight);
 		add(display);
 		initPointFinder();
@@ -65,7 +63,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	}
 
 	public void initPointFinder() { // Makes some more stuff not null
-		find = new ScreenPointFinder(myID);
+		find = new ScreenPointFinder();
 	}
 	
 	public void initTaskManager() { //Makes some stuff not null
@@ -73,21 +71,21 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	}
 
 	public void startEngine() { // Starts the rasterizers and updater
-		update = new UpdateTask(myID);
+		update = new UpdateTask();
 		//double cores = Runtime.getRuntime().availableProcessors();
 		double cores = 1;
 		rasterizers = new RasterizeTask[(int) cores];
 		myManage.addTask(update);
 		for (int i = 0; i < cores; i++) {
-			rasterizers[i] = new RasterizeTask(1 / cores, i, myID);
+			rasterizers[i] = new RasterizeTask(1 / cores, i);
 			myManage.addTask(rasterizers[i]);
 		}
 	}
 
 	public void initUserControls() { // Starts the user controls
-		keyControls = new MainKeyControls(myID);
+		keyControls = new MainKeyControls();
 		updateKeyControls();
-		mover = new MouseMoverTask(myID);
+		mover = new MouseMoverTask();
 		myManage.addTask(mover);
 	}
 

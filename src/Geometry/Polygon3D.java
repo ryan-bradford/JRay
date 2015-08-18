@@ -10,12 +10,11 @@ public class Polygon3D {
 	Color myColor;
 	public double distanceFromCamera;
 	public ColoredPolygon myPoly; 
-	int myID;
 	
-	public Polygon3D(Point3D[] toAdd, Color toColor, int ID) { //The 3D Polygon Object
+	
+	public Polygon3D(Point3D[] toAdd, Color toColor) { //The 3D Polygon Object
 		myColor = toColor;
 		myPoints = toAdd;
-		myID = ID;
 	}
 	
 	public Line[] getLinesToPoint(Point3D toPathTo) { //Makes an array of lines	
@@ -29,16 +28,12 @@ public class Polygon3D {
 	public void rasterizeToScreen() { //Rasterizes the polygon
 		int[] xs = new int[myPoints.length];
 		int[] ys = new int[myPoints.length];
-		Line[] myLines = getLinesToPoint(Main.displays.get(myID).currentScene.cameraLocation); //Gets the lines to the camera
+		Line[] myLines = getLinesToPoint(Main.display.currentScene.cameraLocation); //Gets the lines to the camera
 		for(int i = 0; i < myLines.length; i++) {
-			xs[i] = Main.displays.get(myID).find.getWidthPixel(myLines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
-			ys[i] = Main.displays.get(myID).find.getHeightPixel(myLines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
+			xs[i] = Main.display.find.getWidthPixel(myLines[i].getHorAngle()); //Uses angle to get the x location of the polygons selected point
+			ys[i] = Main.display.find.getHeightPixel(myLines[i].getVertAngle());//Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys);
-	}
-	
-	public void changeID(int newID) {
-		myID = newID;
 	}
 	
 }
