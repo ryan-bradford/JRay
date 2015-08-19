@@ -1,4 +1,4 @@
-package Other;
+package JRay.Other;
 
 import main.Main;
 

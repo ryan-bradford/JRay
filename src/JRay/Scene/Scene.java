@@ -1,16 +1,17 @@
-package Scene;
+package JRay.Scene;
+
 
 import java.awt.Color;
 import java.util.ArrayList;
 
 import main.Main;
-import Geometry.Point3D;
-import Geometry.Polygon3D;
-import ShapeGenerator.ShapeFactory;
+import JRay.Geometry.Point3D;
+import JRay.Geometry.Polygon3D;
+import JRay.ShapeGenerator.ShapeFactory;
 
 public class Scene {
-	ShapeFactory factory; //The object which can produce different polygons
 	private ArrayList<Polygon3D> current; //The polygons that should be rasterized
+	public ArrayList<Polygon3D> toSort; //The polygons that should be rasterized
 	public ArrayList<Polygon3D> toRender; //The polygons that should be rasterized
 	public Point3D cameraLocation = new Point3D(0, 0, 0);
 	public double xAngle = 0; // The camera rotation to the x
@@ -20,12 +21,11 @@ public class Scene {
 	
 	public Scene() {
 		current = new ArrayList<Polygon3D>();
-		factory = new ShapeFactory();
 		for (int i = 0; i < 40; i++) {
 			//addArray(factory.generateCube(i * 100, 200, 0, 50, new Color(255, 0, 0)));
 			//addArray(factory.generateImage(i * 100, 200, 0, 50, "download.jpg"));
 		}
-		addArray(factory.generateCube(-100, 1000, 0, 100, new Color(255, 0, 0)));
+		addArray(ShapeFactory.generateCube(-100, 1000, 0, 100, new Color(255, 0, 0)));
 	}
 	
 
@@ -48,8 +48,8 @@ public class Scene {
 	}
 	
 	public void updateDistances() {
-		for(int i = 0; i < Main.display.currentScene.current.size(); i++) {
-			//Update Poly Distance
+		for(int i = 0; i < current.size(); i++) {
+			current.get(i).updateDistance();
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package Thread;
+package JRay.Thread;
 
 public class TaskManager { // The thing that distributes the tasks to the different cores
 	public CPUCore[] cores;

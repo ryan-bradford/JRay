@@ -1,4 +1,4 @@
-package Thread;
+package JRay.Thread;
 
 public class ExampleTask extends Task {
 

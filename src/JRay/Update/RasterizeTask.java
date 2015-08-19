@@ -1,7 +1,7 @@
-package Update;
+package JRay.Update;
 
 import main.Main;
-import Thread.Task;
+import JRay.Thread.Task;
 
 public class RasterizeTask extends Task {
 

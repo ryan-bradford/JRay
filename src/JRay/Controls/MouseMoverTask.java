@@ -1,12 +1,13 @@
-package Controls;
+package JRay.Controls;
 
 import java.awt.AWTException;
+
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
 import main.Main;
-import Thread.Task;
+import JRay.Thread.Task;
 
 public class MouseMoverTask extends Task {
 

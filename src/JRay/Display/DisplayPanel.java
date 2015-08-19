@@ -1,4 +1,4 @@
-package Display;
+package JRay.Display;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -96,7 +96,7 @@ public class DisplayPanel extends JPanel {
 		g2.fillRect(0, 0, Main.screenWidth, Main.screenHeight); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
-			for (int i = 0; i < Main.display.currentScene.toRender.size(); i++) {
+			for (int i = Main.display.currentScene.toRender.size() - 1; i > 0; i--) {
 				g2.setColor(Main.display.currentScene.toRender.get(i).myPoly.myColor);
 				g2.fillPolygon(Main.display.currentScene.toRender.get(i).myPoly);// Draws the rasterized polygon
 			}

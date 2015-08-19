@@ -1,4 +1,4 @@
-package Thread;
+package JRay.Thread;
 
 import java.util.ArrayList;
 

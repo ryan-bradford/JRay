@@ -1,4 +1,4 @@
-package Geometry;
+package JRay.Geometry;
 
 import java.awt.Color;
 import java.awt.Polygon;
