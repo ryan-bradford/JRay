@@ -1,11 +1,6 @@
 package JRay.Update;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-
 import main.Main;
 import JRay.Geometry.Polygon3D;
 import JRay.Thread.Task;
@@ -28,22 +23,9 @@ public class UpdateTask extends Task {
 			myWait = Main.display.displayWait;
 			if (!Main.display.paused && readyToUpdate()) { // Runs once for every time the rasterizers run
 				Main.display.repaint(); // Makes the screen call the paintComponent method
-				Main.sorting = true;
 				Main.display.currentScene.updateDistances();
-				ArrayList<Polygon3D> failBuffer = Main.display.currentScene.getCurrent();
-				ArrayList<Polygon3D> toSort = Main.display.currentScene.getCurrent();
-				try {
-					Collections.sort(toSort, new Comparator<Polygon3D>() {
-						@Override
-						public int compare(Polygon3D poly1, Polygon3D poly2) {
-							return Double.compare(poly1.distanceFromCamera, poly2.distanceFromCamera);
-						}
-					});
-				} catch (ConcurrentModificationException ex) {
-					toSort = failBuffer;
-				}
-				Main.display.currentScene.toRender = toSort;
-				Main.sorting = false;
+				Main.display.currentScene.toRender = sortArray(Main.display.currentScene.getCurrent());
+				//Main.display.currentScene.toRender = toSort;
 				for (int i = 0; i < Main.display.rasterizers.length; i++) { // Tells the rasterizers to start
 					Main.display.rasterizers[i].isDone = false;
 				}
@@ -81,5 +63,25 @@ public class UpdateTask extends Task {
 	@Override
 	public int getCPULoad() {
 		return 2; // 0 is no load, 3 is maximum load
+	}
+	
+	public ArrayList<Polygon3D> sortArray(ArrayList<Polygon3D> toSort) {
+		int greatestID = 0;
+		for(int i = 0; i < toSort.size(); i++) {
+			for(int x = i; x < toSort.size(); x++) {
+				if(toSort.get(x).distanceFromCamera < toSort.get(greatestID).distanceFromCamera) {
+					greatestID = x;
+				}
+			}
+			toSort = swapValues(greatestID, i, toSort);
+		}
+		return toSort;
+	}
+	
+	public ArrayList<Polygon3D> swapValues(int swap1, int swap2, ArrayList<Polygon3D> toChange) {
+		Polygon3D buffer = toChange.get(swap1);
+		toChange.set(swap1, toChange.get(swap2));
+		toChange.set(swap2, buffer);
+		return toChange;
 	}
 }
