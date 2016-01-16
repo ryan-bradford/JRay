@@ -1,7 +1,6 @@
-package JRay.Display;
+package Display;
 
 import java.awt.Font;
-
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import main.Main;
-import JRay.Controls.PauseKeyControls;
+import Controls.PauseKeyControls;
 
 public class SettingsScreen extends JPanel {
 

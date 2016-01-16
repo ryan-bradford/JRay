@@ -1,4 +1,4 @@
-package JRay.Controls;
+package Controls;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,7 +14,7 @@ public class MainKeyControls implements KeyListener {
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent e) { //Different key JRay.Controls
+	public void keyPressed(KeyEvent e) { //Different key controls
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_A) {//Move left based on your rotation
 			Main.display.currentScene.cameraLocation.xPos -= 10 * Math.cos(Main.display.currentScene.xAngle); 

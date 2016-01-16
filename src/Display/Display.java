@@ -1,21 +1,21 @@
-package JRay.Display;
+package Display;
 
 import java.awt.Cursor;
-
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import com.ryanb3.TaskManager.TaskManager;
+
 import main.Main;
-import JRay.Controls.MainKeyControls;
-import JRay.Controls.MouseMoverTask;
-import JRay.Other.ScreenPointFinder;
-import JRay.Scene.Scene;
-import JRay.Thread.TaskManager;
-import JRay.Update.RasterizeTask;
-import JRay.Update.UpdateTask;
+import Controls.MainKeyControls;
+import Controls.MouseMoverTask;
+import Other.ScreenPointFinder;
+import Scene.Scene;
+import Update.RasterizeTask;
+import Update.UpdateTask;
 
 public class Display extends JFrame { // Just a holder for a JPanel
 
@@ -25,7 +25,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public MainKeyControls keyControls; // The class that control the camera movement
 	public boolean paused = false; // Whether the engine is paused or not
 	public ScreenPointFinder find; // The algorithm that changes angle to pixel
-	MouseMoverTask mover; // The task which JRay.Controls mouse and window centering
+	MouseMoverTask mover; // The task which controls mouse and window centering
 							// Also translates movement to angle movement
 	public Scene currentScene;
 	public double FOV = 1.13446401379; // A nice number which looks good
@@ -83,7 +83,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 		}
 	}
 
-	public void initUserControls() { // Starts the user JRay.Controls
+	public void initUserControls() { // Starts the user controls
 		keyControls = new MainKeyControls();
 		updateKeyControls();
 		mover = new MouseMoverTask();

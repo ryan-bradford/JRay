@@ -1,4 +1,4 @@
-package JRay.Controls;
+package Controls;
 
 import java.awt.AWTException;
 
@@ -6,8 +6,9 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
+import com.ryanb3.TaskManager.Task;
+
 import main.Main;
-import JRay.Thread.Task;
 
 public class MouseMoverTask extends Task {
 
@@ -70,11 +71,6 @@ public class MouseMoverTask extends Task {
 	@Override
 	public int getWait() {
 		return 5;
-	}
-
-	@Override
-	public int[] getData() {
-		return new int[] { 0 };
 	}
 
 	@Override

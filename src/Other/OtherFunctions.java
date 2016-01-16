@@ -1,4 +1,4 @@
-package JRay.Other;
+package Other;
 
 import java.awt.AlphaComposite;
 

@@ -2,13 +2,12 @@ package main;
 
 import java.awt.GraphicsEnvironment;
 
-
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import JRay.Display.Display;
-import JRay.Scene.Scene;
+import Display.Display;
+import Scene.Scene;
 
 public class Main { // The class the begins the engine
 					// It also manages and stores the engines objects
@@ -19,7 +18,6 @@ public class Main { // The class the begins the engine
 	public static Display display = new Display();
 	public static int sensitivityLower = 1;
 	public static int sensitivityUpper = 10;
-	public static boolean sorting = false;
 
 	public static void main(String[] args) { // The main method, starts the engine
 		createDisplay();

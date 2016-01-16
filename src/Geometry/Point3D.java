@@ -1,4 +1,4 @@
-package JRay.Geometry;
+package Geometry;
 
 public class Point3D {
 

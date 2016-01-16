@@ -1,4 +1,4 @@
-package JRay.Display;
+package Display;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -24,11 +24,10 @@ import main.Main;
 public class DisplayPanel extends JPanel {
 
 	int textGap = 14;
+	double deltaT;
 	double timePassed;
-	int FPS = 0;
-	int fullFPS = 0;
 	double lastTime = System.currentTimeMillis();
-	
+	ArrayList<Integer> secondFPSs = new ArrayList<Integer>();
 	public boolean showDebugInfo = true;
 	public SettingsScreen settings;
 	ArrayList<Double> CPULoad = new ArrayList<Double>();
@@ -36,6 +35,7 @@ public class DisplayPanel extends JPanel {
 	ArrayList<Integer> FPSs = new ArrayList<Integer>();
 	double startTime = System.currentTimeMillis();
 	long maxMemory = Runtime.getRuntime().maxMemory();
+	int averageFPS = 0;
 
 	public DisplayPanel() {
 		this.setLayout(null);
@@ -63,19 +63,16 @@ public class DisplayPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		timePassed += System.currentTimeMillis() - lastTime; // Record FPS
-		lastTime = System.currentTimeMillis();
-		FPS = FPS + 1;
 		if (timePassed >= 1000) {
-			fullFPS = FPS;
-			FPS = 0;
-			timePassed = 0.0;
-			FPSs.add(fullFPS);
 			memoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
+			averageFPS = getAverageFPS();
+			FPSs.add(averageFPS);
 			this.CPULoad.add(CPULoad1);
+			timePassed = 0.0;
+			secondFPSs.clear();
 		}
 		g2.setColor(Color.YELLOW); // Draw FPS
-		stringsToDraw[0] = "FPS: " + Integer.toString(fullFPS);
+		stringsToDraw[0] = "FPS: " + Integer.toString(averageFPS);
 		stringsToDraw[1] = ("Free Memory: " + (freeMemory / 1024 / 256));
 		stringsToDraw[2] = ("Allocated Memory: " + (allocatedMemory / 1024 / 256));
 		stringsToDraw[3] = ("Used Memory: " + ((allocatedMemory - freeMemory) / 1024 / 256));
@@ -96,7 +93,7 @@ public class DisplayPanel extends JPanel {
 		g2.fillRect(0, 0, Main.screenWidth, Main.screenHeight); // Draws the background
 		g2.setStroke(new BasicStroke(10));
 		try {
-			for (int i = Main.display.currentScene.toRender.size() - 1; i > 0; i--) {
+			for (int i = 0; i < Main.display.currentScene.toRender.size(); i++) {
 				g2.setColor(Main.display.currentScene.toRender.get(i).myPoly.myColor);
 				g2.fillPolygon(Main.display.currentScene.toRender.get(i).myPoly);// Draws the rasterized polygon
 			}
@@ -181,5 +178,22 @@ public class DisplayPanel extends JPanel {
 			return Double.NaN; // usually takes a couple of seconds before we get real values
 
 		return ((int) (value * 1000) / 10.0); // returns a percentage value with 1 decimal point precision
+	}
+	
+	public int getCurrentFPS() {
+		deltaT = System.currentTimeMillis() - lastTime; // Record FPS
+		timePassed+=deltaT;
+		lastTime = System.currentTimeMillis();
+		int FPS = (int)(1000.0 / deltaT);
+		secondFPSs.add(FPS);
+		return FPS;
+	}
+	
+	public int getAverageFPS() {
+		int total = 0;
+		for(int i = 0; i < secondFPSs.size(); i++) {
+			total+= secondFPSs.get(i);
+		}
+		return total / 1000;
 	}
 }

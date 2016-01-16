@@ -1,7 +1,8 @@
-package JRay.Update;
+package Update;
+
+import com.ryanb3.TaskManager.Task;
 
 import main.Main;
-import JRay.Thread.Task;
 
 public class RasterizeTask extends Task {
 
@@ -47,11 +48,6 @@ public class RasterizeTask extends Task {
 	@Override
 	public int getWait() {
 		return 1;
-	}
-
-	@Override
-	public int[] getData() {
-		return new int[]{0};
 	}
 
 	@Override
