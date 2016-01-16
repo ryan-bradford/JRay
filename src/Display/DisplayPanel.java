@@ -63,6 +63,7 @@ public class DisplayPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		getCurrentFPS();
 		if (timePassed >= 1000) {
 			memoryLoad.add((double) ((allocatedMemory - freeMemory) / 1024 / 256));
 			averageFPS = getAverageFPS();
@@ -185,6 +186,7 @@ public class DisplayPanel extends JPanel {
 		timePassed+=deltaT;
 		lastTime = System.currentTimeMillis();
 		int FPS = (int)(1000.0 / deltaT);
+		System.out.println(FPS);
 		secondFPSs.add(FPS);
 		return FPS;
 	}
