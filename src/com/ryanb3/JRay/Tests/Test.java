@@ -14,20 +14,24 @@ public class Test { // The class the begins the engine
 					// It also manages and stores the engines objects
 
 	// Make it so camera position is saved in the scene
-	public static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static Display display;
-	public static int sensitivityLower = 1;
-	public static int sensitivityUpper = 10;
+	public int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public Display display;
+	public static final int sensitivityLower = 1;
+	public static final int sensitivityUpper = 10;
 
 	public static void main(String[] args) { // The main method, starts the engine
+		new Test();
+	}
+	
+	public Test() {
 		createDisplay();
-		Scene myScene = new Scene();
+		Scene myScene = new Scene(display);
 		display.addScene(myScene);
 	}
 
-	public static void createDisplay() { // Inits and Makes the JFrame visible
-		display = new Display(new TaskManager());
+	public void createDisplay() { // Inits and Makes the JFrame visible
+		display = new Display(new TaskManager(), screenWidth, screenHeight);
 		display.pack();
 		display.setBounds(0, 0, (int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth()),
 				(int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight()));

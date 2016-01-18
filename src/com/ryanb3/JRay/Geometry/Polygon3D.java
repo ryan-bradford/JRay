@@ -2,18 +2,21 @@ package com.ryanb3.JRay.Geometry;
 
 import java.awt.Color;
 
+import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.JRay.Tests.Test;
 
 public class Polygon3D {
 
-	Point3D[] myPoints;
+	public Point3D[] myPoints;
 	Color myColor;
 	public double distanceFromCamera;
 	public ColoredPolygon myPoly;
+	Display display;
 
-	public Polygon3D(Point3D[] toAdd, Color toColor) { // The 3D Polygon Object
+	public Polygon3D(Point3D[] toAdd, Color toColor, Display display) { // The 3D Polygon Object
 		myColor = toColor;
 		myPoints = toAdd;
+		this.display = display;
 	}
 
 	public Line[] getLinesToPoint(Point3D toPathTo) { // Makes an array of lines
@@ -26,7 +29,7 @@ public class Polygon3D {
 
 	public void updateDistance() { // Gets the farthest points distance from the camera
 		int maxID = 0; // Used to order how the ColoredPolygons are drawn
-		Line[] current = getLinesToPoint(Test.display.currentScene.cameraLocation);
+		Line[] current = getLinesToPoint(display.currentScene.cameraLocation);
 		for (int i = 1; i < current.length; i++) {
 			if (current[i].length < current[maxID].length) {
 				maxID = i;
@@ -38,10 +41,10 @@ public class Polygon3D {
 	public void rasterizeToScreen() { // Rasterizes the polygon
 		int[] xs = new int[myPoints.length];
 		int[] ys = new int[myPoints.length];
-		Line[] myLines = getLinesToPoint(Test.display.currentScene.cameraLocation); // Gets the lines to the camera
+		Line[] myLines = getLinesToPoint(display.currentScene.cameraLocation); // Gets the lines to the camera
 		for (int i = 0; i < myLines.length; i++) {
-			xs[i] = Test.display.find.getWidthPixel(myLines[i].getHorAngle()); // Uses angle to get the x location of the polygons selected point
-			ys[i] = Test.display.find.getHeightPixel(myLines[i].getVertAngle());// Uses angle to get the y location of the polygons selected point
+			xs[i] = display.find.getWidthPixel(myLines[i].getHorAngle()); // Uses angle to get the x location of the polygons selected point
+			ys[i] = display.find.getHeightPixel(myLines[i].getVertAngle());// Uses angle to get the y location of the polygons selected point
 		}
 		myPoly = new ColoredPolygon(myColor, xs, ys);
 	}

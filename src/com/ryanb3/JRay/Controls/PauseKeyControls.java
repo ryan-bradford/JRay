@@ -3,22 +3,23 @@ package com.ryanb3.JRay.Controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.JRay.Tests.Test;
 
 public class PauseKeyControls implements KeyListener{
 
+	Display display;
 	
-	
-	public PauseKeyControls() {
-
+	public PauseKeyControls(Display display) {
+		this.display = display;
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_ESCAPE) {
-			Test.display.paused = false;
-			Test.display.display.startEngine();
+			display.paused = false;
+			display.display.startEngine();
 		}
 	}
 

@@ -22,7 +22,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public RasterizeTask[] rasterizers; // The tasks which do the rasterization
 	public UpdateTask update; // The class that orders how stuff should be drawn and what should be drawn
 	public MainKeyControls keyControls; // The class that control the camera movement
-	public boolean paused = false; // Whether the engine is paused or not
+	public Boolean paused = false; // Whether the engine is paused or not
 	public ScreenPointFinder find; // The algorithm that changes angle to pixel
 	MouseMoverTask mover; // The task which controls mouse and window centering
 							// Also translates movement to angle movement
@@ -31,11 +31,15 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public TaskManager myManage; //The thing that allocates "Tasks" to different CPU Cores
 	public int screenOffset = 0;
 	public int displayWait = 1; //1000 / FPSLimit - 1 = displayWait
+	public int screenWidth;
+	public int screenHeight;
 
-	public Display(TaskManager manage) { // Inits the display panel
+	public Display(TaskManager manage, int screenWidth, int screenHeight) { // Inits the display panel
+		this.screenHeight = screenHeight;
+		this.screenWidth = screenWidth;
 		myManage = manage;
-		display = new DisplayPanel();
-		display.setBounds(0, 0, Test.screenWidth, Test.screenHeight);
+		display = new DisplayPanel(screenWidth, screenHeight, this);
+		display.setBounds(0, 0, screenWidth, screenHeight);
 		add(display);
 		initPointFinder();
 		initUserControls();
@@ -63,25 +67,25 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	}
 
 	public void initPointFinder() { // Makes some more stuff not null
-		find = new ScreenPointFinder();
+		find = new ScreenPointFinder(this);
 	}
 
 	public void startEngine() { // Starts the rasterizers and updater
-		update = new UpdateTask();
+		update = new UpdateTask(this);
 		//double cores = Runtime.getRuntime().availableProcessors();
 		double cores = 1;
 		rasterizers = new RasterizeTask[(int) cores];
 		myManage.addTask(update);
 		for (int i = 0; i < cores; i++) {
-			rasterizers[i] = new RasterizeTask(1 / cores, i);
+			rasterizers[i] = new RasterizeTask(1 / cores, i, this);
 			myManage.addTask(rasterizers[i]);
 		}
 	}
 
 	public void initUserControls() { // Starts the user controls
-		keyControls = new MainKeyControls();
+		keyControls = new MainKeyControls(this);
 		updateKeyControls();
-		mover = new MouseMoverTask();
+		mover = new MouseMoverTask(this);
 		myManage.addTask(mover);
 	}
 
