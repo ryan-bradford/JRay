@@ -33,8 +33,8 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public int screenOffset = 0;
 	public int displayWait = 1; //1000 / FPSLimit - 1 = displayWait
 
-	public Display() { // Inits the display panel
-		initTaskManager();
+	public Display(TaskManager manage) { // Inits the display panel
+		myManage = manage;
 		display = new DisplayPanel();
 		display.setBounds(0, 0, Main.screenWidth, Main.screenHeight);
 		add(display);
@@ -65,10 +65,6 @@ public class Display extends JFrame { // Just a holder for a JPanel
 
 	public void initPointFinder() { // Makes some more stuff not null
 		find = new ScreenPointFinder();
-	}
-	
-	public void initTaskManager() { //Makes some stuff not null
-		myManage = new TaskManager();
 	}
 
 	public void startEngine() { // Starts the rasterizers and updater

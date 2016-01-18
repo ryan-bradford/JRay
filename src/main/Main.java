@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import com.ryanb3.TaskManager.TaskManager;
+
 import Display.Display;
 import Scene.Scene;
 
@@ -15,7 +17,7 @@ public class Main { // The class the begins the engine
 	// Make it so camera position is saved in the scene
 	public static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static Display display = new Display();
+	public static Display display;
 	public static int sensitivityLower = 1;
 	public static int sensitivityUpper = 10;
 
@@ -26,7 +28,7 @@ public class Main { // The class the begins the engine
 	}
 
 	public static void createDisplay() { // Inits and Makes the JFrame visible
-		display = new Display();
+		display = new Display(new TaskManager());
 		display.pack();
 		display.setBounds(0, 0, (int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getWidth()),
 				(int) (GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight()));
