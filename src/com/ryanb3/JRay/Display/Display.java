@@ -1,4 +1,4 @@
-package Display;
+package com.ryanb3.JRay.Display;
 
 import java.awt.Cursor;
 import java.awt.Point;
@@ -7,15 +7,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import com.ryanb3.JRay.Controls.MainKeyControls;
+import com.ryanb3.JRay.Controls.MouseMoverTask;
+import com.ryanb3.JRay.Other.ScreenPointFinder;
+import com.ryanb3.JRay.Scene.Scene;
+import com.ryanb3.JRay.Tests.Test;
+import com.ryanb3.JRay.Update.RasterizeTask;
+import com.ryanb3.JRay.Update.UpdateTask;
 import com.ryanb3.TaskManager.TaskManager;
-
-import main.Main;
-import Controls.MainKeyControls;
-import Controls.MouseMoverTask;
-import Other.ScreenPointFinder;
-import Scene.Scene;
-import Update.RasterizeTask;
-import Update.UpdateTask;
 
 public class Display extends JFrame { // Just a holder for a JPanel
 
@@ -36,7 +35,7 @@ public class Display extends JFrame { // Just a holder for a JPanel
 	public Display(TaskManager manage) { // Inits the display panel
 		myManage = manage;
 		display = new DisplayPanel();
-		display.setBounds(0, 0, Main.screenWidth, Main.screenHeight);
+		display.setBounds(0, 0, Test.screenWidth, Test.screenHeight);
 		add(display);
 		initPointFinder();
 		initUserControls();

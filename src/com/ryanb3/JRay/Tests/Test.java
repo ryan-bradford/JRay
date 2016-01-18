@@ -1,4 +1,4 @@
-package main;
+package com.ryanb3.JRay.Tests;
 
 import java.awt.GraphicsEnvironment;
 
@@ -6,12 +6,11 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import com.ryanb3.JRay.Display.Display;
+import com.ryanb3.JRay.Scene.Scene;
 import com.ryanb3.TaskManager.TaskManager;
 
-import Display.Display;
-import Scene.Scene;
-
-public class Main { // The class the begins the engine
+public class Test { // The class the begins the engine
 					// It also manages and stores the engines objects
 
 	// Make it so camera position is saved in the scene

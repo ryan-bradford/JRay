@@ -1,8 +1,7 @@
-package Update;
+package com.ryanb3.JRay.Update;
 
+import com.ryanb3.JRay.Tests.Test;
 import com.ryanb3.TaskManager.Task;
-
-import main.Main;
 
 public class RasterizeTask extends Task {
 
@@ -21,17 +20,17 @@ public class RasterizeTask extends Task {
 
 	@Override
 	public void runTask() { // Runs once for every time the updater runs
-		if (!Main.display.paused && !isDone) { // Rasterizes the polygons it needs to that are within its range
+		if (!Test.display.paused && !isDone) { // Rasterizes the polygons it needs to that are within its range
 			if ((orderNum + 1) != Runtime.getRuntime().availableProcessors()) {
-				lowerRange = (int) (Math.ceil(Main.display.currentScene.toRender.size() * percent * orderNum));
-				upperRange = (int) (Math.floor(Main.display.currentScene.toRender.size() * percent * (orderNum + 1)));
+				lowerRange = (int) (Math.ceil(Test.display.currentScene.toRender.size() * percent * orderNum));
+				upperRange = (int) (Math.floor(Test.display.currentScene.toRender.size() * percent * (orderNum + 1)));
 			} else {
-				lowerRange = (int) (Math.ceil(Main.display.currentScene.toRender.size() * percent * orderNum));
-				upperRange = Main.display.currentScene.toRender.size();
+				lowerRange = (int) (Math.ceil(Test.display.currentScene.toRender.size() * percent * orderNum));
+				upperRange = Test.display.currentScene.toRender.size();
 			}
 			for (int i = lowerRange; i < upperRange; i++) {
 				try {
-					Main.display.currentScene.toRender.get(i).rasterizeToScreen(); // Sets a buffer polygon
+					Test.display.currentScene.toRender.get(i).rasterizeToScreen(); // Sets a buffer polygon
 				} catch (ArrayIndexOutOfBoundsException ex) {
 
 				}

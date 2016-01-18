@@ -1,12 +1,12 @@
-package Scene;
+package com.ryanb3.JRay.Scene;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import main.Main;
-import Geometry.Point3D;
-import Geometry.Polygon3D;
-import ShapeGenerator.ShapeFactory;
+import com.ryanb3.JRay.Geometry.Point3D;
+import com.ryanb3.JRay.Geometry.Polygon3D;
+import com.ryanb3.JRay.ShapeGenerator.ShapeFactory;
+import com.ryanb3.JRay.Tests.Test;
 
 public class Scene {
 	ShapeFactory factory; //The object which can produce different polygons
@@ -33,14 +33,14 @@ public class Scene {
 		for (int i = 0; i < toAdd.length; i++) {
 			current.add(toAdd[i]);
 		}
-		Main.display.repaint();
+		Test.display.repaint();
 	}
 
 	public void addArray(ArrayList<Polygon3D> toAdd) {//A method to add an arraylist of polygons to current
 		for (int i = 0; i < toAdd.size(); i++) {
 			current.add(toAdd.get(i));
 		}
-		Main.display.repaint();
+		Test.display.repaint();
 	}
 	
 	public ArrayList<Polygon3D> getCurrent() {
@@ -48,8 +48,8 @@ public class Scene {
 	}
 	
 	public void updateDistances() {
-		for(int i = 0; i < Main.display.currentScene.current.size(); i++) {
-			//Update Poly Distance
+		for(int i = 0; i < Test.display.currentScene.current.size(); i++) {
+			Test.display.currentScene.current.get(i).updateDistance();
 		}
 	}
 	

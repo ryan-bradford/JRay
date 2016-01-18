@@ -1,13 +1,12 @@
-package Update;
+package com.ryanb3.JRay.Update;
 
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.ryanb3.JRay.Geometry.Polygon3D;
+import com.ryanb3.JRay.Other.OtherFunctions;
+import com.ryanb3.JRay.Tests.Test;
 import com.ryanb3.TaskManager.Task;
-
-import main.Main;
-import Geometry.Polygon3D;
-import Other.OtherFunctions;
 
 public class UpdateTask extends Task {
 
@@ -24,21 +23,21 @@ public class UpdateTask extends Task {
 	@Override
 	public void runTask() { // The default task object
 		try {
-			myWait = Main.display.displayWait;
-			if (!Main.display.paused && readyToUpdate()) { // Runs once for every time the rasterizer runs
-				Main.display.repaint(); // Makes the screen call the paintComponent method
+			myWait = Test.display.displayWait;
+			if (!Test.display.paused && readyToUpdate()) { // Runs once for every time the rasterizer runs
+				Test.display.repaint(); // Makes the screen call the paintComponent method
 				//Make Polys Update Distance
-				Main.display.currentScene.updateDistances();
-				Main.display.currentScene.toRender = Main.display.currentScene.getCurrent();
-				Collections.sort(Main.display.currentScene.toRender, new Comparator<Polygon3D>() {
+				Test.display.currentScene.updateDistances();
+				Test.display.currentScene.toRender = Test.display.currentScene.getCurrent();
+				Collections.sort(Test.display.currentScene.toRender, new Comparator<Polygon3D>() {
 			        @Override
 			        public int compare(Polygon3D  poly1, Polygon3D  poly2)
 			        {
 			            return Double.compare(poly1.distanceFromCamera, poly2.distanceFromCamera);
 			        }
 			    });
-				for (int i = 0; i < Main.display.rasterizers.length; i++) { // Tells the rasterizers to start
-					Main.display.rasterizers[i].isDone = false;
+				for (int i = 0; i < Test.display.rasterizers.length; i++) { // Tells the rasterizers to start
+					Test.display.rasterizers[i].isDone = false;
 				}
 			}
 		} catch (IndexOutOfBoundsException ex) {
@@ -47,8 +46,8 @@ public class UpdateTask extends Task {
 	}
 
 	public boolean readyToUpdate() {
-		for (int i = 0; i < Main.display.rasterizers.length; i++) {
-			if (Main.display.rasterizers[i].isDone == false) {
+		for (int i = 0; i < Test.display.rasterizers.length; i++) {
+			if (Test.display.rasterizers[i].isDone == false) {
 				return false;
 			}
 		}

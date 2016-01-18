@@ -1,4 +1,4 @@
-package Geometry;
+package com.ryanb3.JRay.Geometry;
 
 public class Line {
 

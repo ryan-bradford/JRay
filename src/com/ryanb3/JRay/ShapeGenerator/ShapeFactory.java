@@ -1,9 +1,9 @@
-package ShapeGenerator;
+package com.ryanb3.JRay.ShapeGenerator;
 
 import java.awt.Color;
 
-import Geometry.Point3D;
-import Geometry.Polygon3D;
+import com.ryanb3.JRay.Geometry.Point3D;
+import com.ryanb3.JRay.Geometry.Polygon3D;
 
 public class ShapeFactory { // Creates some polygons
 	// Z Rotation = 0 is flat
@@ -14,7 +14,7 @@ public class ShapeFactory { // Creates some polygons
 
 	}
 	
-	public Polygon3D[] generateSquare(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
+	public static Polygon3D[] generateSquare(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
 		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
 		Point3D p2 = new Point3D(cornerX, cornerY, cornerZ + width); // Above Corner
 		Point3D p3 = new Point3D(cornerX + width, cornerY, cornerZ + width); // Opposite Corner
@@ -26,7 +26,7 @@ public class ShapeFactory { // Creates some polygons
 		return toReturn;
 	}
 
-	public Polygon3D[] generateCube(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
+	public static Polygon3D[] generateCube(int cornerX, int cornerY, int cornerZ, int width, Color toColor) { // Stetches X - Z
 		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
 		Point3D p2 = new Point3D(cornerX, cornerY, cornerZ + width);
 		Point3D p3 = new Point3D(cornerX + width, cornerY, cornerZ + width);
@@ -57,7 +57,7 @@ public class ShapeFactory { // Creates some polygons
 		return toReturn;
 	}
 	
-	public Polygon3D[] generatePoint(int cornerX, int cornerY, int cornerZ, double width) {
+	public static Polygon3D[] generatePoint(int cornerX, int cornerY, int cornerZ, double width) {
 		Point3D p1 = new Point3D(cornerX, cornerY, cornerZ); // Corner Point
 		Point3D[] points = new Point3D[]{p1};
 		Polygon3D mine = new Polygon3D(points, new Color(02550));
