@@ -199,6 +199,6 @@ public class DisplayPanel extends JPanel {
 		for(int i = 0; i < secondFPSs.size(); i++) {
 			total+= secondFPSs.get(i);
 		}
-		return total / 1000;
+		return total / secondFPSs.size();
 	}
 }
