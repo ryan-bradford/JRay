@@ -7,7 +7,6 @@ import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.JRay.Geometry.Point3D;
 import com.ryanb3.JRay.Geometry.Polygon3D;
 import com.ryanb3.JRay.ShapeGenerator.ShapeFactory;
-import com.ryanb3.JRay.Tests.Test;
 
 public class Scene {
 	

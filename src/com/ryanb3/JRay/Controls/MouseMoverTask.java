@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.awt.Robot;
 
 import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Tests.Test;
 import com.ryanb3.TaskManager.Task;
 
 public class MouseMoverTask extends Task {

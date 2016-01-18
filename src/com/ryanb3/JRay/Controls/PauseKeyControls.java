@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Tests.Test;
 
 public class PauseKeyControls implements KeyListener{
 

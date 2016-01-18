@@ -5,8 +5,6 @@ import java.util.Comparator;
 
 import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.JRay.Geometry.Polygon3D;
-import com.ryanb3.JRay.Other.OtherFunctions;
-import com.ryanb3.JRay.Tests.Test;
 import com.ryanb3.TaskManager.Task;
 
 public class UpdateTask extends Task {

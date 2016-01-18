@@ -19,8 +19,6 @@ import javax.management.ObjectName;
 import javax.management.ReflectionException;
 import javax.swing.JPanel;
 
-import com.ryanb3.JRay.Tests.Test;
-
 public class DisplayPanel extends JPanel {
 
 	int textGap = 14;
@@ -192,7 +190,6 @@ public class DisplayPanel extends JPanel {
 		timePassed+=deltaT;
 		lastTime = System.currentTimeMillis();
 		int FPS = (int)(1000.0 / deltaT);
-		System.out.println(FPS);
 		secondFPSs.add(FPS);
 		return FPS;
 	}

@@ -1,7 +1,6 @@
 package com.ryanb3.JRay.Update;
 
 import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Tests.Test;
 import com.ryanb3.TaskManager.Task;
 
 public class RasterizeTask extends Task {
@@ -13,7 +12,7 @@ public class RasterizeTask extends Task {
 	public boolean shouldRasterize = false;
 	public boolean isDone = true;
 	Display display;
-
+	
 	public RasterizeTask(double percent, int orderNum, Display display) {
 		this.display = display;
 		this.orderNum = orderNum;

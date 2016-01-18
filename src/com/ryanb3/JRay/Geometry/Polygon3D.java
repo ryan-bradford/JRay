@@ -3,7 +3,6 @@ package com.ryanb3.JRay.Geometry;
 import java.awt.Color;
 
 import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Tests.Test;
 
 public class Polygon3D {
 
