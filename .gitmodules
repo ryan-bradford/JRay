@@ -1,0 +1,3 @@
+[submodule "TaskManager"]
+	path = TaskManager
+	url = https://github.com/ryanb3/TaskManager
