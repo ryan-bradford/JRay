@@ -4,13 +4,11 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import com.ryanb3.JRay.Controls.MainKeyControls;
 import com.ryanb3.JRay.Controls.MouseMoverTask;
-import com.ryanb3.JRay.Geometry.Polygon3D;
 import com.ryanb3.JRay.Other.ScreenPointFinder;
 import com.ryanb3.JRay.Scene.Scene;
 import com.ryanb3.JRay.Update.RasterizeTask;
