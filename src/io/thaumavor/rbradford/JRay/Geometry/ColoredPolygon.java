@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Geometry;
+package io.thaumavor.rbradford.JRay.Geometry;
 
 import java.awt.Color;
 import java.awt.Polygon;

@@ -1,6 +1,6 @@
-package com.ryanb3.JRay.Other;
+package io.thaumavor.rbradford.JRay.Other;
 
-import com.ryanb3.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Display.Display;
 
 public class ScreenPointFinder {
 

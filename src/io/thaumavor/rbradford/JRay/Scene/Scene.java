@@ -1,12 +1,12 @@
-package com.ryanb3.JRay.Scene;
+package io.thaumavor.rbradford.JRay.Scene;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Geometry.Point3D;
-import com.ryanb3.JRay.Geometry.Polygon3D;
-import com.ryanb3.JRay.ShapeGenerator.ShapeFactory;
+import io.thaumavor.rbradford.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Geometry.Point3D;
+import io.thaumavor.rbradford.JRay.Geometry.Polygon3D;
+import io.thaumavor.rbradford.JRay.ShapeGenerator.ShapeFactory;
 
 public class Scene {
 	

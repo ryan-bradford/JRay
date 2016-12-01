@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Other;
+package io.thaumavor.rbradford.JRay.Other;
 
 import java.awt.AlphaComposite;
 

@@ -1,8 +1,8 @@
-package com.ryanb3.JRay.Geometry;
+package io.thaumavor.rbradford.JRay.Geometry;
 
 import java.awt.Color;
 
-import com.ryanb3.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Display.Display;
 
 public class Polygon3D {
 

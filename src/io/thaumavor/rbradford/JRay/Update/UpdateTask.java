@@ -1,11 +1,12 @@
-package com.ryanb3.JRay.Update;
+package io.thaumavor.rbradford.JRay.Update;
 
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Geometry.Polygon3D;
 import com.ryanb3.TaskManager.Task;
+
+import io.thaumavor.rbradford.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Geometry.Polygon3D;
 
 public class UpdateTask extends Task {
 

@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Display;
+package io.thaumavor.rbradford.JRay.Display;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,8 +13,8 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import com.ryanb3.JRay.Controls.PauseKeyControls;
-import com.ryanb3.JRay.Tests.Test;
+import io.thaumavor.rbradford.JRay.Controls.PauseKeyControls;
+import io.thaumavor.rbradford.JRay.Tests.Test;
 
 public class SettingsScreen extends JPanel {
 

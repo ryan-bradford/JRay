@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Controls;
+package io.thaumavor.rbradford.JRay.Controls;
 
 import java.awt.AWTException;
 
@@ -7,8 +7,9 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 
-import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.TaskManager.Task;
+
+import io.thaumavor.rbradford.JRay.Display.Display;
 
 public class MouseMoverTask extends Task {
 

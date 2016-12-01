@@ -1,9 +1,9 @@
-package com.ryanb3.JRay.Controls;
+package io.thaumavor.rbradford.JRay.Controls;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.ryanb3.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Display.Display;
 
 public class PauseKeyControls implements KeyListener{
 

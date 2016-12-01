@@ -1,7 +1,8 @@
-package com.ryanb3.JRay.Update;
+package io.thaumavor.rbradford.JRay.Update;
 
-import com.ryanb3.JRay.Display.Display;
 import com.ryanb3.TaskManager.Task;
+
+import io.thaumavor.rbradford.JRay.Display.Display;
 
 public class RasterizeTask extends Task {
 

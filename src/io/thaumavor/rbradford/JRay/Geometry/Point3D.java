@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Geometry;
+package io.thaumavor.rbradford.JRay.Geometry;
 
 public class Point3D {
 

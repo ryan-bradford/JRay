@@ -1,10 +1,10 @@
-package com.ryanb3.JRay.ShapeGenerator;
+package io.thaumavor.rbradford.JRay.ShapeGenerator;
 
 import java.awt.Color;
 
-import com.ryanb3.JRay.Display.Display;
-import com.ryanb3.JRay.Geometry.Point3D;
-import com.ryanb3.JRay.Geometry.Polygon3D;
+import io.thaumavor.rbradford.JRay.Display.Display;
+import io.thaumavor.rbradford.JRay.Geometry.Point3D;
+import io.thaumavor.rbradford.JRay.Geometry.Polygon3D;
 
 public class ShapeFactory { // Creates some polygons
 	// Z Rotation = 0 is flat

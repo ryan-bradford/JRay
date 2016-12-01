@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Display;
+package io.thaumavor.rbradford.JRay.Display;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

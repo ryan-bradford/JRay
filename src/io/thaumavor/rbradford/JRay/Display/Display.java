@@ -1,4 +1,4 @@
-package com.ryanb3.JRay.Display;
+package io.thaumavor.rbradford.JRay.Display;
 
 import java.awt.Cursor;
 import java.awt.Point;
@@ -7,13 +7,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import com.ryanb3.JRay.Controls.MainKeyControls;
-import com.ryanb3.JRay.Controls.MouseMoverTask;
-import com.ryanb3.JRay.Other.ScreenPointFinder;
-import com.ryanb3.JRay.Scene.Scene;
-import com.ryanb3.JRay.Update.RasterizeTask;
-import com.ryanb3.JRay.Update.UpdateTask;
 import com.ryanb3.TaskManager.TaskManager;
+
+import io.thaumavor.rbradford.JRay.Controls.MainKeyControls;
+import io.thaumavor.rbradford.JRay.Controls.MouseMoverTask;
+import io.thaumavor.rbradford.JRay.Other.ScreenPointFinder;
+import io.thaumavor.rbradford.JRay.Scene.Scene;
+import io.thaumavor.rbradford.JRay.Update.RasterizeTask;
+import io.thaumavor.rbradford.JRay.Update.UpdateTask;
 
 public class Display extends JFrame { // Just a holder for a JPanel
 
